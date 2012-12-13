@@ -25,15 +25,15 @@
 
 //Wifibot spec
 #define WIFIBOT_WHEEL_N 4
-#define WIFIBOT_WHEEL_RADIUS 25 // mm
-#define WIFIBOT_WHEEL_SPREADING 300 // mm
+#define WIFIBOT_WHEEL_RADIUS 72 // mm (145 for diameter)
+#define WIFIBOT_WHEEL_SPREADING 300 // mm 220 (inside) / 300 (average) / 380 (outside) - 170 between front and back
 #define WIFIBOT_MOTOR_N 4 // of motors
 #define WIFIBOT_MOTOR_MAX_SPEED 156 // rpm
 #define WIFIBOT_MOTOR_U_MAX 24.0 // Volt DC
 #define WIFIBOT_CAM_FPS_MAX 30 // fps
 #define WIFIBOT_CAM_RES_MAX_WIDTH 1600 // px
 #define WIFIBOT_CAM_RES_MAX_HEIGHT 1200 // px
-#define WIFIBOT_CAM_HEIGHT 300 // mm, camera's height (relative to the ground)
+#define WIFIBOT_CAM_HEIGHT 320 // mm, camera's average height (relative to the ground)
 #define WIFIBOT_CAM_ALPHA MAPS_PI/4 //radian, camera's angle (relative to horizontal)
 
 //opencv
@@ -69,14 +69,14 @@ private :
 	cv::Mat m_B; // Proportional gain matrix
     cv::Mat m_K; // Integral gain matrix
     cv::Mat m_LTplus; // Interaction Matrix Pseudo Inverse
-	cv::Mat m_E; // Error matrix
+	cv::Mat m_integralE; // Integral value matrix
 
-	cv::Mat getCommand(cv::Mat, cv::Mat, cv::Mat, cv::Mat);
+	cv::Mat getCommand(cv::Mat&, cv::Mat&, cv::Mat&, cv::Mat&);
 	cv::Mat getError(const unsigned int, const double);
 	cv::Mat getProportional ();
 	cv::Mat getIntegral();
 	cv::Mat getInteractionMatrixPseudoInverse();
-	cv::Mat getVoltage(cv::Mat);
+	cv::Mat getVoltage(cv::Mat&);
 	double cos2(double); // == cos²(x)
 	double sin2(double); // == sin²(x)
 };
