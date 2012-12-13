@@ -53,13 +53,12 @@ void MAPSVisionBasedCommand::Birth()
 	m_B = getProportional();
     m_K = getIntegral();
     m_LTplus = getInteractionMatrixPseudoInverse();
+	m_integralE = cv::Mat::zeros(2,1,CV_MAT_DOUBLE); // values initialised to zero
 }
 
 void MAPSVisionBasedCommand::Core() 
 {
-    // Reports this information to the RTMaps console
-    ReportInfo("VisionBasedCommand: Passing through Core() method");
-
+    
 	//reading the inputs
 	m_inputs[0] = &Input("iRho");
 	m_inputs[1] = &Input("iTheta");
@@ -73,7 +72,9 @@ void MAPSVisionBasedCommand::Core()
 	MAPSTimestamp t = SynchroStartReading(2, m_inputs, m_ioElts, m_synch_tolerance, &timeout);
 	if (t == -1 || m_ioElts == NULL){ //timeout
 		m_synch_tolerance *= 2;
-		ReportInfo(MAPSString("Synchronized reading aborted by timeout : synchronisation tolerance mulitplide by 2 = ") + MAPSString(m_synch_tolerance));
+		MAPSStreamedString sstr;
+		sstr << "Synchronized reading aborted by timeout : synchronisation tolerance mulitplide by 2 => " << m_synch_tolerance;
+		ReportInfo(MAPSString(sstr));
 		return;
 	}
 	else if (m_ioElts[0] == NULL || m_ioElts[1] == NULL)
@@ -82,9 +83,20 @@ void MAPSVisionBasedCommand::Core()
 	m_rho = m_ioElts[0]->Integer();
 	m_theta = m_ioElts[1]->Float();
 
+	MAPSStreamedString iStr;
+	iStr << "INPUTS : Rho = " << m_rho << " | Theta = " << m_theta;
+	ReportInfo(MAPSString(iStr));
+
+	//ReportInfo("Process error...");
     cv::Mat E = getError(m_rho, m_theta);
-    cv::Mat Speed = getCommand(m_LTplus, m_B, m_E, m_K);
+	//ReportInfo("Process command...");
+    cv::Mat Speed = getCommand(m_LTplus, m_B, E, m_K);
+	//ReportInfo("Process outputs conversion...");
 	cv::Mat Voltage = getVoltage(Speed);
+
+	MAPSStreamedString oStr;
+	oStr << "OUTPUTS : Left's set point = " << (int) Voltage.at<double>(0,0) << " | Right's set point = " << (int) Voltage.at<double>(1,0);
+	ReportInfo(MAPSString(oStr));
 
 	//The chosen timestamp is the oldest of the 2 received MAPSIOElts. (if _synch_tolerance is 0, then the 2 MAPSIOElt timestamps are equal).
 	//Generate the outputs
@@ -106,27 +118,45 @@ void MAPSVisionBasedCommand::Death()
 
 }
 
-cv::Mat MAPSVisionBasedCommand::getCommand(cv::Mat LTplus, cv::Mat B, cv::Mat E, cv::Mat K) {
+cv::Mat MAPSVisionBasedCommand::getCommand(cv::Mat& LTplus, cv::Mat& B, cv::Mat& E, cv::Mat& K) {
     
-    static cv::Mat integralE = cv::Mat::zeros(2,1,CV_MAT_DOUBLE);
-    
-    integralE += E;
+	//ReportInfo("\t[Process command] Process integral...");
+	MAPSStreamedString eStr;
+	eStr << "\t[Command] Error = [" << E.at<double>(0,0) << ", " << E.at<double>(1,0) << "]";
+	ReportInfo(MAPSString(eStr));
 
+    m_integralE += E;
+	
+	MAPSStreamedString ieStr;
+	ieStr << "\t[Command] Integral = [" << m_integralE.at<double>(0,0) << ", " << m_integralE.at<double>(1,0) << "]";
+	ReportInfo(MAPSString(ieStr));
+
+	//ReportInfo("\t[Process command] Process kinematic torsor...");
     //kinematic torsor
     cv::Mat T(6,1,CV_MAT_DOUBLE);
-    T = LTplus*B*(E+K.mul(integralE));
+    T = LTplus*B*(E+K.mul(m_integralE));
     
     double phi = T.at<double>(4,0); // == rotation around y axis
     
+	//ReportInfo("\t[Process command] Process angular speed...");
     //angular speed (rad/s)
     cv::Mat Omega = cv::Mat::ones(2,1,CV_MAT_DOUBLE);
     Omega.at<double>(0,0) = (2*m_speed0 - WIFIBOT_WHEEL_SPREADING*phi)/(2*WIFIBOT_WHEEL_RADIUS); // left wheels
     Omega.at<double>(1,0) = (2*m_speed0 + WIFIBOT_WHEEL_SPREADING*phi)/(2*WIFIBOT_WHEEL_RADIUS); // right wheels
+	
+	MAPSStreamedString oStr;
+	oStr << "\t[Command] Omega = [" <<  Omega.at<double>(0,0) << ", " << Omega.at<double>(1,0) << "]";
+	ReportInfo(MAPSString(oStr));
 
+	ReportInfo("\t[Command] Process speed...");
 	//speed (rpm)
     cv::Mat Speed;
     Omega.copyTo(Speed);
     Speed *= 60/(2*MAPS_PI);
+
+	MAPSStreamedString sStr;
+	sStr << "\t[Command] Speed = [" <<  Speed.at<double>(0,0) << ", " << Speed.at<double>(1,0) << "]";
+	ReportInfo(MAPSString(sStr));
 
     //unecessary because the RTMaps block for controlling the Wifibot (wifibot_serial) is doing this cheking already
 	//if(abs(Speed.at<double>(0,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(0,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(0,0) > 0 ? 1 : -1);
@@ -180,7 +210,7 @@ cv::Mat MAPSVisionBasedCommand::getInteractionMatrixPseudoInverse () {
     return LTplus;
 }
 
-cv::Mat MAPSVisionBasedCommand::getVoltage(cv::Mat Speed) {
+cv::Mat MAPSVisionBasedCommand::getVoltage(cv::Mat& Speed) {
     
     return Speed*WIFIBOT_MOTOR_U_MAX/WIFIBOT_MOTOR_MAX_SPEED; // return in Volt
 }

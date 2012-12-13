@@ -4,9 +4,9 @@
     <LocalDebuggerCommand>"C:\Program Files\Intempora\RTMaps4Wifibot\bin\rtmaps4Wifibot.exe"</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsRemoteDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>"C:\Users\Maxime\Dropbox\SY27\Projet\Ressources\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\"</LocalDebuggerWorkingDirectory>
-    <RemoteDebuggerCommand>"C:\Program Files\Intempora\RTMaps4Wifibot\bin\rtmaps4Wifibot.exe"</RemoteDebuggerCommand>
-    <RemoteDebuggerWorkingDirectory>"C:\Users\Maxime\Dropbox\SY27\Projet\Ressources\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk"</RemoteDebuggerWorkingDirectory>
-    <RemoteDebuggerServerName>localhost</RemoteDebuggerServerName>
+    <RemoteDebuggerCommand>$(TargetPath)</RemoteDebuggerCommand>
+    <RemoteDebuggerWorkingDirectory>$(ProjectDir)</RemoteDebuggerWorkingDirectory>
+    <RemoteDebuggerServerName>$(COMPUTERNAME)</RemoteDebuggerServerName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerCommand>"C:\Program Files\Intempora\RTMaps4Wifibot\bin\rtmaps4Wifibot.exe"</LocalDebuggerCommand>
@@ -14,8 +14,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LocalDebuggerWorkingDirectory>"C:\Users\Maxime\Dropbox\SY27\Projet\Ressources\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\"</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsRemoteDebugger</DebuggerFlavor>
-    <RemoteDebuggerCommand>"C:\Program Files\Intempora\RTMaps4Wifibot\bin\rtmaps4Wifibot.exe"</RemoteDebuggerCommand>
-    <RemoteDebuggerWorkingDirectory>"C:\Users\Maxime\Dropbox\SY27\Projet\Ressources\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk"</RemoteDebuggerWorkingDirectory>
-    <RemoteDebuggerServerName>localhost</RemoteDebuggerServerName>
+    <RemoteDebuggerCommand>$(DebugCommand_)</RemoteDebuggerCommand>
+    <RemoteDebuggerWorkingDirectory>$(ProjectDir)</RemoteDebuggerWorkingDirectory>
+    <RemoteDebuggerServerName>$(COMPUTERNAME)</RemoteDebuggerServerName>
   </PropertyGroup>
 </Project>
