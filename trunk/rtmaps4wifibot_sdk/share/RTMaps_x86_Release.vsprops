@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="RTMaps x86 Release Properties"
+	OutputDirectory="$(SolutionDir)build\$(PlatformName)$(ConfigurationName)\$(ProjectName)"
+	IntermediateDirectory="$(SolutionDir)build\$(PlatformName)$(ConfigurationName)\tmp\$(ProjectName)"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="local_interfaces;$(SolutionDir)include"
+		PreprocessorDefinitions="WIN32;_WINDOWS;_USRDLL;NDEBUG;_CRT_SECURE_NO_DEPRECATE"
+		StringPooling="true"
+		RuntimeLibrary="2"
+		WarningLevel="3"
+		SuppressStartupBanner="true"
+		CompileAs="0"
+	/>
+	<Tool
+		Name="VCLibrarianTool"
+		IgnoreAllDefaultLibraries="true"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		IgnoreImportLibrary="true"
+		AdditionalDependencies="rtmaps4wifibot_pck.lib msvcrt.lib"
+		AdditionalLibraryDirectories="$(SolutionDir)lib"
+		GenerateManifest="true"
+		IgnoreAllDefaultLibraries="true"
+		ImportLibrary="$(IntDir)\$(TargetName).lib"
+		OutputFile="$(SolutionDir)packages\$(ProjectName).pck"
+		ProgramDatabaseFile="$(IntDir)\$(TargetName).pdb"
+		TargetMachine="1"
+	/>
+	<Tool
+		Name="VCPostBuildEventTool"
+		Description="Package Validation"
+		CommandLine="&quot;$(SolutionDir)bin\rtmaps4wifibot_pck.exe&quot; &quot;$(TargetPath)&quot;"
+	/>
+</VisualStudioPropertySheet>
