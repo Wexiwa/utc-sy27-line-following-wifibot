@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F93A6A45-D260-4250-8323-B1E3A7AD12AC}") = "NewPackage", "src\NewPackage.u\rtmaps_NewPackage_vc2008.vcproj", "{F93A6A45-D260-4250-8323-B1E3A7AD12AC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rtmaps_wifibot", "src\wifibot.u\rtmaps_wifibot_vc2008.vcproj", "{B228B9E7-B9DB-4F1A-AEA7-AA80743F6A56}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rtmaps_samples", "src\samples.u\rtmaps_samples_vc2008.vcproj", "{E6548F6C-CC5C-4A05-99F0-66D7E4BE1A8A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F93A6A45-D260-4250-8323-B1E3A7AD12AC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F93A6A45-D260-4250-8323-B1E3A7AD12AC}.Debug|Win32.Build.0 = Debug|Win32
+		{F93A6A45-D260-4250-8323-B1E3A7AD12AC}.Release|Win32.ActiveCfg = Release|Win32
+		{F93A6A45-D260-4250-8323-B1E3A7AD12AC}.Release|Win32.Build.0 = Release|Win32
+		{B228B9E7-B9DB-4F1A-AEA7-AA80743F6A56}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B228B9E7-B9DB-4F1A-AEA7-AA80743F6A56}.Debug|Win32.Build.0 = Debug|Win32
+		{B228B9E7-B9DB-4F1A-AEA7-AA80743F6A56}.Release|Win32.ActiveCfg = Release|Win32
+		{B228B9E7-B9DB-4F1A-AEA7-AA80743F6A56}.Release|Win32.Build.0 = Release|Win32
+		{E6548F6C-CC5C-4A05-99F0-66D7E4BE1A8A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E6548F6C-CC5C-4A05-99F0-66D7E4BE1A8A}.Debug|Win32.Build.0 = Debug|Win32
+		{E6548F6C-CC5C-4A05-99F0-66D7E4BE1A8A}.Release|Win32.ActiveCfg = Release|Win32
+		{E6548F6C-CC5C-4A05-99F0-66D7E4BE1A8A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

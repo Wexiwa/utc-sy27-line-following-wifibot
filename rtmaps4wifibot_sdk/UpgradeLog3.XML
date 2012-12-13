@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="RTMaps4Wifibot_sdk_vc2008">
+</Property><Property Name="Fichier solution" Value="C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\RTMaps4Wifibot_sdk_vc2008.sln">
+</Property><Property Name="Fichier d'options utilisateur" Value="C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\RTMaps4Wifibot_sdk_vc2008.suo">
+</Property><Property Name="Date" Value="samedi 8 décembre 2012">
+</Property><Property Name="Time" Value="22:16">
+</Property><Property Name="Numéro de journal" Value="3">
+</Property></Properties><Event ErrorLevel="2" Project="" Source="RTMaps4Wifibot_sdk_vc2008.sln" Description="Erreur lors de la création du fichier de sauvegarde : C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\RTMaps4Wifibot_sdk_vc2008.sln.old">
+</Event><Event ErrorLevel="0" Project="" Source="RTMaps4Wifibot_sdk_vc2008.suo" Description="Fichier correctement sauvegardé en tant que C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\RTMaps4Wifibot_sdk_vc2008.suo.old">
+</Event><Event ErrorLevel="0" Project="rtmaps_SY27_vc2008" Source="src\SY27.u\rtmaps_SY27_vc2008.vcproj" Description="Converting project file 'C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\src\SY27.u\rtmaps_SY27_vc2008.vcproj'.">
+</Event><Event ErrorLevel="0" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Release.vsprops" Description="Converting propertysheet file 'C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\share\RTMaps_x86_Release.vsprops' for configuration 'Release|Win32'.">
+</Event><Event ErrorLevel="1" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Release.vsprops" Description="Attribute 'ProjectType' of 'RTMaps x86 Release Properties' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Release.vsprops" Description="Attribute 'Version' of 'RTMaps x86 Release Properties' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Release.vsprops" Description="Done converting to new property sheet file 'C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\share\RTMaps_x86_Release.vsprops' for configuration 'Release|Win32'.">
+</Event><Event ErrorLevel="1" Project="rtmaps_SY27_vc2008" Source="src\SY27.u\rtmaps_SY27_vc2008.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="0" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Debug.vsprops" Description="Converting propertysheet file 'C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\share\RTMaps_x86_Debug.vsprops' for configuration 'Debug|Win32'.">
+</Event><Event ErrorLevel="1" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Debug.vsprops" Description="Attribute 'ProjectType' of 'RTMaps x86 Debug Properties' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Debug.vsprops" Description="Attribute 'Version' of 'RTMaps x86 Debug Properties' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="rtmaps_SY27_vc2008" Source="share\RTMaps_x86_Debug.vsprops" Description="Done converting to new property sheet file 'C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\share\RTMaps_x86_Debug.vsprops' for configuration 'Debug|Win32'.">
+</Event><Event ErrorLevel="0" Project="rtmaps_SY27_vc2008" Source="src\SY27.u\rtmaps_SY27_vc2008.vcproj" Description="Done converting to new project file 'C:\Users\Maxime\Downloads\cd_wifibot_lab_V3\cdlabRS232_V3\robotic_framework\RTMAPS\rtmaps4wifibot_sdk\src\SY27.u\rtmaps_SY27_vc2008.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="rtmaps_SY27_vc2008" Source="src\SY27.u\rtmaps_SY27_vc2008.vcproj" Description="Converted">
+</Event><Event ErrorLevel="3" Project="rtmaps_NewPackage_vc2008" Source="src\NewPackage.u\rtmaps_NewPackage_vc2008.vcxproj" Description="Aucune conversion requise">
+</Event><Event ErrorLevel="3" Project="rtmaps_wifibot_vc2008" Source="src\wifibot.u\rtmaps_wifibot_vc2008.vcxproj" Description="Aucune conversion requise">
+</Event><Event ErrorLevel="3" Project="rtmaps_samples_vc2008" Source="src\samples.u\rtmaps_samples_vc2008.vcxproj" Description="Aucune conversion requise">
+</Event><Event ErrorLevel="0" Project="" Source="RTMaps4Wifibot_sdk_vc2008.sln" Description="Le fichier solution ne requiert pas de conversion.">
+</Event><Event ErrorLevel="3" Project="" Source="RTMaps4Wifibot_sdk_vc2008.sln" Description="Aucune conversion requise">
+</Event></UpgradeLog>

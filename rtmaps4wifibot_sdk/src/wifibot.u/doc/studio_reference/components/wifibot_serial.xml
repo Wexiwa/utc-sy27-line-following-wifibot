@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ComponentResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="wifibot_serial" xsi:noNamespaceSchemaLocation="ComponentResources.xsd">
+<Type>Component</Type>
+<IconFile>wifibot_icon.png</IconFile>
+<TargetOS>OS-independant</TargetOS>
+<Lang lang="ENG">
+<GroupName>Wifibot</GroupName>
+<Documentation>
+<Component>
+<Alias>Wifibot serial</Alias>
+<Description><![CDATA[<p>This component is aimed at running on-board on the wifibot and interfaces the
+RS232 serial protocol to control the wifibot.</p>
+<p>Note that it is not compatible with the I2C wifibot protocol for older robot models.</p>
+]]></Description>
+</Component>
+<Property MAPSName="input_mode">
+<Alias>Input mode</Alias>
+<Description><![CDATA[Defines the way this component receives left and right motors commands on its
+input(s):
+<ul>
+<li>Vectorized: the component will have only 1 input and expects on it a vector
+of 2 integers with the left and right motor speeds.
+<li>Left/Right separated: the component will have 2 inputs (left speed and 
+right speed) and expects on each of them a scalar containing the required value
+for the corresponding motor.
+</ul>]]></Description>
+<DefaultValue>Vectorized</DefaultValue>
+</Property>
+<Property MAPSName="commands_send_period">
+<Alias>Commands send period</Alias>
+<Description><![CDATA[Period (in microseconds) at which the motors commands are sent to the wifibot.
+If the wifibot does not receive commmands in a certain period of time, it just
+stops. So this component periodically repeats the last known commands in case no
+new command has arrived in the specified period.]]></Description>
+<DefaultValue>10000</DefaultValue>
+</Property>
+<Property MAPSName="closed_loop_speed_control">
+<Alias>Closed loop speed control</Alias>
+<Description><![CDATA[Activates or not the PID controler for closed loop speed control on the wifibot.]]></Description>
+<DefaultValue>true</DefaultValue>
+</Property>
+<Property MAPSName="pid_speed">
+<Alias>PID speed</Alias>
+<Description/>
+</Property>
+<Output MAPSName="left_speed">
+<Alias>Left speed</Alias>
+<Description/>
+</Output>
+<Output MAPSName="left_odo">
+<Alias>Left odometer</Alias>
+<Description/>
+</Output>
+<Output MAPSName="left_adc">
+<Alias>Left ADC</Alias>
+<Description/>
+</Output>
+<Output MAPSName="right_speed">
+<Alias>Right speed</Alias>
+<Description/>
+</Output>
+<Output MAPSName="right_odo">
+<Alias>Right odometer</Alias>
+<Description/>
+</Output>
+<Output MAPSName="right_adc">
+<Alias>Right ADC</Alias>
+<Description/>
+</Output>
+<Output MAPSName="batt">
+<Alias>Battery</Alias>
+<Description/>
+</Output>
+<Output MAPSName="current">
+<Alias>Current</Alias>
+<Description/>
+</Output>
+<Output MAPSName="version">
+<Alias>Version</Alias>
+<Description/>
+</Output>
+<Input MAPSName="ileft_and_right_speeds">
+<Alias>Left/Right speeds</Alias>
+<Description/>
+</Input>
+<Input MAPSName="ileft_speed">
+<Alias>Left speed</Alias>
+<Description/>
+</Input>
+<Input MAPSName="iright_speed">
+<Alias>Right speed</Alias>
+<Description/>
+</Input>
+<Input MAPSName="iStream8">
+<Alias>Serial stream in</Alias>
+<Description><![CDATA[To be connected to the output of the Serial port component.]]></Description>
+</Input>
+</Documentation>
+</Lang>
+</ComponentResources>

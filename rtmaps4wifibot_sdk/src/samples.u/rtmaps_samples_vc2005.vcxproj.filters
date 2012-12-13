@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{efeda4a4-5a3b-4319-88cc-a1539d4ea8ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 1 - numeric data handling">
+      <UniqueIdentifier>{f921a509-ff9e-4424-a0b1-f18068dbed14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 2 - multiple inputs %28IMPORTANT%29">
+      <UniqueIdentifier>{d982ec00-4edd-4c3e-aaa5-9b5546ab95a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 3 - image processing">
+      <UniqueIdentifier>{4b9f2da1-cf6a-464a-ad98-ccc7214fa435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 3 - image processing\use_of_imageprocessing_templates">
+      <UniqueIdentifier>{46d416a3-6a61-4530-8a53-5e0e251576aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 4 - can frames data handling">
+      <UniqueIdentifier>{7479750a-c92a-480e-ad02-83021d91b0ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 5 - miscellaneous functions">
+      <UniqueIdentifier>{c15e8d12-d758-4a88-9986-4ec720aa2533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 6 - multi thread components">
+      <UniqueIdentifier>{045fe2d3-b687-4bc0-93e2-9aad02ad3c60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 7 - stream">
+      <UniqueIdentifier>{0738aadb-bc91-42c5-98f5-7b32d80c8c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Chapter 8 - custom clocks and synchronisation">
+      <UniqueIdentifier>{49d6ade8-d42d-4c67-b647-12c979bc97c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_interfaces">
+      <UniqueIdentifier>{46e40c85-c496-42a3-b292-e5e40a9a1d54}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\chapter 1.txt">
+      <Filter>src\Chapter 1 - numeric data handling</Filter>
+    </None>
+    <None Include="src\chapter 2.txt">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </None>
+    <None Include="src\chapter 3.txt">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </None>
+    <None Include="src\chapter 4.txt">
+      <Filter>src\Chapter 4 - can frames data handling</Filter>
+    </None>
+    <None Include="src\chapter 5.txt">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </None>
+    <None Include="src\chapter 6.txt">
+      <Filter>src\Chapter 6 - multi thread components</Filter>
+    </None>
+    <None Include="src\chapter 7.txt">
+      <Filter>src\Chapter 7 - stream</Filter>
+    </None>
+    <None Include="src\chapter 8.txt">
+      <Filter>src\Chapter 8 - custom clocks and synchronisation</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\maps_multiplier_1.cpp">
+      <Filter>src\Chapter 1 - numeric data handling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_multiplier_2.cpp">
+      <Filter>src\Chapter 1 - numeric data handling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_multiplier_3.cpp">
+      <Filter>src\Chapter 1 - numeric data handling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_multiplier_4.cpp">
+      <Filter>src\Chapter 1 - numeric data handling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_vectorizer_sample_0_ERROR_TO_BANISH.cpp">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_vectorizer_sample_1_triggered.cpp">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_vectorizer_sample_2_reactive.cpp">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_vectorizer_sample_3_resampling.cpp">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_vectorizer_sample_4_resynchronizer.cpp">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_vectorizer_sample_5_generic.cpp">
+      <Filter>src\Chapter 2 - multiple inputs %28IMPORTANT%29</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_FusionSampleWithMultipleStartReading.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_FusionSampleWithSamplingReaders.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_ImageGenerator.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_ImageHeaderDisplay.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_MonoVisionIPUSample.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_simple_imageprocessing.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_StereoVisionIPUSample.cpp">
+      <Filter>src\Chapter 3 - image processing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_ImageProcessing1Src1DestSample.cpp">
+      <Filter>src\Chapter 3 - image processing\use_of_imageprocessing_templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_ImageProcessing2Src1DestSample.cpp">
+      <Filter>src\Chapter 3 - image processing\use_of_imageprocessing_templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_ROIThreshold.cpp">
+      <Filter>src\Chapter 3 - image processing\use_of_imageprocessing_templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_Threshold.cpp">
+      <Filter>src\Chapter 3 - image processing\use_of_imageprocessing_templates</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_CANReader.cpp">
+      <Filter>src\Chapter 4 - can frames data handling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_CANWriter.cpp">
+      <Filter>src\Chapter 4 - can frames data handling</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_ComponentWithActions.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_counter.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_DynamicInputs.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_enum_props.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_SetProperty_Overload.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_UserStructureInput.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_UserStructureOutput.cpp">
+      <Filter>src\Chapter 5 - miscellaneous functions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_MultiThread.cpp">
+      <Filter>src\Chapter 6 - multi thread components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_MultiThreadAndSynchronisation.cpp">
+      <Filter>src\Chapter 6 - multi thread components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_rs232sensor.cpp">
+      <Filter>src\Chapter 7 - stream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_rs232sensorWithOutput.cpp">
+      <Filter>src\Chapter 7 - stream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_Stream8IOSample.cpp">
+      <Filter>src\Chapter 7 - stream</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_customclock.cpp">
+      <Filter>src\Chapter 8 - custom clocks and synchronisation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_synchronizer.cpp">
+      <Filter>src\Chapter 8 - custom clocks and synchronisation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="local_interfaces\maps_CANReader.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_CANWriter.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_ComponentWithActions.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_counter.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_customclock.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_DynamicInputs.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_enum_props.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_FusionSampleWithMultipleStartReading.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_FusionSampleWithSamplingReaders.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_ImageGenerator.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_ImageHeaderDisplay.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_ImageProcessing1Src1DestSample.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_ImageProcessing2Src1DestSample.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_MonoVisionIPUSample.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_multiplier_1.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_multiplier_2.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_multiplier_3.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_multiplier_4.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_MultiThread.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_MultiThreadAndSynchronisation.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_ROIThreshold.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_rs232sensor.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_rs232sensorWithOutput.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_SetProperty_Overload.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_simple_imageprocessing.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_StereoVisionIPUSample.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_Stream8IOSample.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_synchronizer.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_Threshold.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_UserStructureInput.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_UserStructureOutput.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_vectorizer_sample_0_ERROR_TO_BANISH.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_vectorizer_sample_1_triggered.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_vectorizer_sample_2_reactive.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_vectorizer_sample_3_resampling.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_vectorizer_sample_4_resynchronizer.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_vectorizer_sample_5_generic.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\UserDefinitions.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

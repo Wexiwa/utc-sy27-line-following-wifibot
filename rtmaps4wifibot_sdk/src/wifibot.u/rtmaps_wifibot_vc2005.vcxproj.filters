@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="sockets">
+      <UniqueIdentifier>{9999f510-922b-4096-bc70-fe9f593253dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sockets\include">
+      <UniqueIdentifier>{dc40e4af-e2bf-41cc-a23c-b0be298f8976}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sockets\lib">
+      <UniqueIdentifier>{f482fddc-1e4f-44e4-a2b3-5981a032da10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{de8d58af-6a33-4061-a1cb-4b26ca32bc1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="local_interfaces">
+      <UniqueIdentifier>{74a52526-7e42-4867-9dc8-9cd71979f221}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sockets\include\MAPSInetAddr.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSOsWrapper.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSSocket.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSSocketClient.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSSocketConnection.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSSocketServer.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSSystemDefs.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSTcpClient.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSTcpServer.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="sockets\include\MAPSUdpClient.h">
+      <Filter>sockets\include</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_wifibot_serial.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_wifibot_tcp_client.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_wifibot_tcp_server.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="sockets\lib\api_rtmaps_sockets.lib">
+      <Filter>sockets\lib</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\maps_keyboard_4_wifibot.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_package_definition.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_wifibot_serial.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_wifibot_tcp_client.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\maps_wifibot_tcp_server.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
