@@ -10,6 +10,8 @@
 #include <vector>
 #include <iostream>
 
+#define APP_NAME "WifiBot"
+
 using namespace cv;
 using namespace std;
 
