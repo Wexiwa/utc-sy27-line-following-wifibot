@@ -2,7 +2,8 @@
 #include "opencv/cv.h"
 #include "opencv/cxcore.h"
 #include "opencv/highgui.h"
-
+#define __IPL_H__ 
+#include "maps.hpp" 
 
 #include <algorithm>
 #include <vector>
