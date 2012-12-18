@@ -29,7 +29,7 @@ MAPS_COMPONENT_DEFINITION(MAPSLineFinding,"LineFinding","1.0",128,
 
 void MAPSLineFinding::Birth()
 {
-	img = cvLoadImage("C:\\Users\\Marcelo\\Documents\\SY27\\data4\\image\\image-0.png");
+	img = cv::imread("C:\\Users\\Marcelo\\Documents\\SY27\\data4\\image\\image-0.png",0);
 	cut = cv::Mat(Size(160 , 140),img.depth(), img.channels() );
 	bw = cv::Mat(Size(160 , 140),img.depth(), img.channels() );
 	canny= cv::Mat(Size(160 , 140),img.depth(), img.channels() );
@@ -54,14 +54,14 @@ void MAPSLineFinding::Core()
 		cv::cvtColor(canny, withLines, CV_GRAY2BGR);		  // image that will have the lines draw in color for testing
 		
 		
-		Vec2f foundLine; 
+		cv::Vec2f foundLine; 
 		int found = findLine(canny,&foundLine);			   //applies HoughLines and chose the best line among all the found in the image
 
 		
 		if(found == 0){ // when no line is found use the last found line for calculation
 			double rho = oldLine[0], theta = oldLine[1] ;
 			
-			Point pt1,pt2;
+			cv::Point pt1,pt2;
 			double a = cos(theta), b = sin(theta);
 			double x0 = a*rho, y0 = b*rho;
 
@@ -78,7 +78,7 @@ void MAPSLineFinding::Core()
 			oldLine = foundLine;
 			double rho = foundLine[0], theta = foundLine[1] ;
 		
-			Point pt1,pt2;
+			cv::Point pt1,pt2;
 			double a = cos(theta), b = sin(theta);
 			double x0 = a*rho, y0 = b*rho;
 
@@ -95,7 +95,7 @@ void MAPSLineFinding::Core()
 		
 		
 		sprintf(filename,"C:\\Users\\Marcelo\\Documents\\SY27\\data4\\image\\image-%d.png",i); //calculating new filename
-		img = cvLoadImage(filename, 0);
+		img = cv::imread(filename, 0);
 		i++;
 
 		if(i>=518) break;

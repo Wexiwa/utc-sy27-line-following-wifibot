@@ -29,15 +29,15 @@ private :
 	//IplImage *img;
 
 	//local variables
-	Mat img; // image from file
-	Mat cut; //cutted image for the Region of Interest
-    Mat bw; // Black and white image for threshold filter
-    Mat canny; // image for canny filter	
-	Mat withLines; //collored image with line draw on it (for testing)
+	cv::Mat img; // image from file
+	cv::Mat cut; //cutted image for the Region of Interest
+    cv::Mat bw; // Black and white image for threshold filter
+    cv::Mat canny; // image for canny filter	
+	cv::Mat withLines; //collored image with line draw on it (for testing)
 	
-	Vec2f oldLine; // variable to store the last line found
+	cv::Vec2f oldLine; // variable to store the last line found
 
-	Rect ROI; //region of interest for cutting
+	cv::Rect ROI; //region of interest for cutting
 
 	char filename[200];//string to save the adress of the image for testing
 	int i;
@@ -49,7 +49,7 @@ private :
 };
 
 struct myclass {
-  bool operator() (Vec2f i,Vec2f j){ //function used to compare 2 lines so sort function can work and we can find the median
+  bool operator() (cv::Vec2f i,cv::Vec2f j){ //function used to compare 2 lines so sort function can work and we can find the median
 	double theta1 = i[1];
 	double theta2 = j[1];
 	double alpha1,alpha2; //angles that will be effectivly be used for comparing, it's the angle of the line with the lower part of the image
