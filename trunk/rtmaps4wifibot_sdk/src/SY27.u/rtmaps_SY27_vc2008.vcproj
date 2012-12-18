@@ -51,9 +51,9 @@
 		<Filter Name="src">
 			<File RelativePath=".\src\maps_package_definition.cpp">
 			</File>
-			<File RelativePath=".\src\maps_VisionBasedCommand.cpp"/></Filter>
+			<File RelativePath=".\src\maps_VisionBasedCommand.cpp"/><File RelativePath=".\src\maps_LineFinding.cpp"/></Filter>
 		<Filter Name="local_interfaces">
-			<File RelativePath=".\local_interfaces\maps_VisionBasedCommand.h"/></Filter>
+			<File RelativePath=".\local_interfaces\maps_VisionBasedCommand.h"/><File RelativePath=".\local_interfaces\maps_LineFinding.h"/></Filter>
 	</Files>
 	<Globals>
 	</Globals>

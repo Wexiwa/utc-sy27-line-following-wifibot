@@ -15,9 +15,15 @@
     <ClCompile Include="src\maps_VisionBasedCommand.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\maps_LineFinding.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="local_interfaces\maps_VisionBasedCommand.h">
+      <Filter>local_interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="local_interfaces\maps_LineFinding.h">
       <Filter>local_interfaces</Filter>
     </ClInclude>
   </ItemGroup>
