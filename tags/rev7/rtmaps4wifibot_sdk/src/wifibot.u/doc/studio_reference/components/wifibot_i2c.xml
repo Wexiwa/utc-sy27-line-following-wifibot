@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ComponentResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="wifibot_i2c" xsi:noNamespaceSchemaLocation="ComponentResources.xsd">
+<Type>Component</Type>
+<IconFile>wifibot_icon.png</IconFile>
+<TargetOS>OS-independant</TargetOS>
+<Lang lang="ENG">
+<GroupName>Wifibot</GroupName>
+<Documentation>
+<Component>
+<Alias>Wifibot I2C</Alias>
+<Description><![CDATA[Interface to control the old models Wifibots via the I2C protocol. Newer wifibots
+now use a serial RS232 interface and can be controlled via the "Wifibot serial"
+component.]]></Description>
+</Component>
+<Property MAPSName="pCOM">
+<Alias>COM port</Alias>
+<Description/>
+</Property>
+<Property MAPSName="pMode">
+<Alias>Mode</Alias>
+<Description/>
+</Property>
+<Property MAPSName="pBatteryLevel">
+<Alias>Battery level</Alias>
+<Description/>
+</Property>
+<Property MAPSName="pPeriod">
+<Alias>Period</Alias>
+<Description/>
+</Property>
+<Property MAPSName="pUseWifibotIHM">
+<Alias>Use Wifibot HMI</Alias>
+<Description/>
+</Property>
+<Output MAPSName="oBattery">
+<Alias>Battery level</Alias>
+<Description/>
+</Output>
+<Output MAPSName="oOdemeterLR">
+<Alias>Odometers left/right</Alias>
+<Description/>
+</Output>
+<Action MAPSName="aGetMotors">
+<Alias>aGetMotors</Alias>
+<Description/>
+</Action>
+<Action MAPSName="aStop">
+<Alias>aStop</Alias>
+<Description/>
+</Action>
+</Documentation>
+</Lang>
+</ComponentResources>
