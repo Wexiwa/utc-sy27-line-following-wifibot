@@ -3,6 +3,7 @@
 #include "opencv/cxcore.h"
 #include "opencv/highgui.h"
 #define __IPL_H__ 
+// Includes maps sdk library header
 #include "maps.hpp" 
 
 #include <algorithm>
@@ -11,9 +12,6 @@
 
 using namespace cv;
 using namespace std;
-
-// Includes maps sdk library header
-#include "maps.hpp"
 
 class MAPSLineFinding : public MAPSComponent 
 {
