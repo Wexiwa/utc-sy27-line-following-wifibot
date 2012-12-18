@@ -1,14 +1,12 @@
-﻿La génération a démarré 13/12/2012 14:53:06.
+﻿La génération a démarré 18/12/2012 18:24:18.
      1>Projet "C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\src\SY27.u\rtmaps_SY27_vc2008.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
-         Création de "Release\SY27.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
+         Mise à jour de l'horodatage "Release\SY27.unsuccessfulbuild".
        ClCompile:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I./local_interfaces /Zi /nologo /W1 /WX- /O2 /Oy- /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\maps_package_definition.cpp src\maps_VisionBasedCommand.cpp
-         maps_package_definition.cpp
-         maps_VisionBasedCommand.cpp
-         Génération de code en cours...
+         Toutes les sorties sont à jour.
        Link:
-         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pck" /NOLOGO /LIBPATH:../../lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib rtmaps_ring_buffers.lib rtmaps4wifibot_pck.lib cv210.lib cxcore210.lib highgui210.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\SY27.pck.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.lib" /MACHINE:X86 /DLL Release\maps_package_definition.obj
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pck" /NOLOGO /LIBPATH:../../lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib rtmaps_ring_buffers.lib rtmaps4wifibot_pck.lib cv210.lib cvaux210.lib cxcore210.lib highgui210.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\SY27.pck.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.lib" /MACHINE:X86 /DLL Release\maps_LineFinding.obj
+         Release\maps_package_definition.obj
          Release\maps_VisionBasedCommand.obj
             Création de la bibliothèque C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.lib et de l'objet C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.exp
          rtmaps_SY27_vc2008.vcxproj -> C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pck
@@ -21,4 +19,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:14.34
+Temps écoulé 00:00:02.54
