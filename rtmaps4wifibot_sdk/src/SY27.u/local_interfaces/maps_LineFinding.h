@@ -17,6 +17,8 @@
 //#include <vector>
 //#include <iostream>
 
+#define MAX_DOBJS   50
+
 using namespace cv;
 using namespace std;
 
@@ -26,7 +28,15 @@ class MAPSLineFinding : public MAPSComponent
 	// Use standard header definition macro
 	MAPS_COMPONENT_STANDARD_HEADER_CODE(MAPSLineFinding)
 private :
+
 	// Place here your specific methods and attributes
+
+	//from opencv4Rtmaps
+	int m_Method;
+    bool m_FirstTime;
+    bool m_OutputEdges;
+    CvMemStorage* m_Storage;
+    IplImage	  m_GrayImage;
 
 	//outputs
 	int rho;
@@ -49,10 +59,11 @@ private :
 	char filename[200];//string to save the adress of the image for testing
 	int i;
 
-	int MAPSLineFinding::findLine (Mat img, Vec2f *finalLine );
+	//int MAPSLineFinding::findLine (Mat img, Vec2f *finalLine );
+	int MAPSLineFinding::findLine (CvSeq* lines, Vec2f *finalLine);
 	cv::Vec2f MAPSLineFinding::findMedian(vector<Vec2f> lines, int counter);
 	bool MAPSLineFinding::compareLines(Vec2f i,Vec2f j);
-
+	void MAPSLineFinding::getSubImg(IplImage* img, IplImage* subImg, CvRect roiRect);
 };
 
 struct myclass {
