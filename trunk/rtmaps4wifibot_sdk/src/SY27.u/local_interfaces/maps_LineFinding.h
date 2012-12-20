@@ -17,7 +17,9 @@
 //#include <vector>
 //#include <iostream>
 
-#define MAX_DOBJS   50
+#define MAX_DOBJS   1
+#define OUT_IMAGE_H 140
+#define OUT_IMAGE_W 320
 
 using namespace cv;
 using namespace std;
@@ -46,18 +48,18 @@ private :
 	//IplImage *img;
 
 	//local variables
-	cv::Mat img; // image from file
-	cv::Mat cut; //cutted image for the Region of Interest
-    cv::Mat bw; // Black and white image for threshold filter
-    cv::Mat canny; // image for canny filter	
-	cv::Mat withLines; //collored image with line draw on it (for testing)
+	//cv::Mat img; // image from file
+	//cv::Mat cut; //cutted image for the Region of Interest
+    //cv::Mat bw; // Black and white image for threshold filter
+    //cv::Mat canny; // image for canny filter	
+	//cv::Mat withLines; //collored image with line draw on it (for testing)
 	
 	cv::Vec2f oldLine; // variable to store the last line found
 
-	cv::Rect ROI; //region of interest for cutting
+	//cv::Rect ROI; //region of interest for cutting
 
-	char filename[200];//string to save the adress of the image for testing
-	int i;
+	//char filename[200];//string to save the adress of the image for testing
+	//int i;
 
 	//int MAPSLineFinding::findLine (Mat img, Vec2f *finalLine );
 	int MAPSLineFinding::findLine (CvSeq* lines, Vec2f *finalLine);
