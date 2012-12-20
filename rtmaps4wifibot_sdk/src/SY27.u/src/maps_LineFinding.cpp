@@ -43,10 +43,10 @@ MAPS_COMPONENT_DEFINITION(MAPSLineFinding,"LineFinding","1.0",128,
 void MAPSLineFinding::Birth()
 {
     //img = cv::imread("C:\\Users\\Marcelo\\Documents\\SY27\\data4\\image\\image-0.png",0);
-	cut = cv::Mat(Size(160 , 140),img.depth(), 3 );
-	bw = cv::Mat(Size(160 , 140),img.depth(), 3);
-	canny= cv::Mat(Size(160 , 140),img.depth(), 3 );
-	ROI = cv::Rect( 0,90, 320,140 );
+	//cut = cv::Mat(Size(160 , 140),img.depth(), 3 );
+	//bw = cv::Mat(Size(160 , 140),img.depth(), 3);
+	//canny= cv::Mat(Size(160 , 140),img.depth(), 3 );
+	//ROI = cv::Rect( 0,90, 320,140 );
 	//i=1;
 	/*
 	// The first time we get an image data, we have to allocate the output buffers
@@ -171,12 +171,24 @@ void MAPSLineFinding::Core()
 		}
 		m_GrayImage = MAPS::IplImageModel(iIPLImage.width,iIPLImage.height,MAPS_CHANNELSEQ_GRAY);
 		if (m_OutputEdges) {
-			Output(1).AllocOutputBufferIplImage(m_GrayImage);
+			Output("edgesImage").AllocOutputBufferIplImage(m_GrayImage);
 			m_GrayImage.imageData = NULL;
 		} else {
 			m_GrayImage.imageData = new char[m_GrayImage.imageSize];
 		}
 	}
+
+	//ReportInfo("Processing image...");
+	//ReportInfo("\t[Process] ROI...");
+	CvRect roi;
+	roi.x = 0;
+	roi.y = 90;
+	roi.width = OUT_IMAGE_W;
+	roi.height = OUT_IMAGE_H;
+
+	IplImage& sub = iIPLImage; //cutted image for the Region of Interest
+
+	getSubImg(&iIPLImage, &sub, roi);
 
 	int edgesThreshold1 = 100;
 	int edgesThreshold2 = 300;
@@ -193,33 +205,23 @@ void MAPSLineFinding::Core()
 		edgesImagePtr = &m_GrayImage;
 	}
 
-	//ReportInfo("Processing image...");
-	//ReportInfo("\t[Process] ROI...");
-	CvRect roi;
-	roi.x = 0;
-	roi.y = 90;
-	roi.width = 320;
-	roi.height = 140;
-	getSubImg(&iIPLImage, &iIPLImage, roi);
-
 	//ReportInfo("\t[Process] Canny...");	
-	cvCanny(&iIPLImage,edgesImagePtr,edgesThreshold1,edgesThreshold2,edgesAperture);
+	cvCanny(&sub,edgesImagePtr,edgesThreshold1,edgesThreshold2,edgesAperture);
 
 	//ReportInfo("\t[Process] Hough lines...");
-	CvSeq* lines = cvHoughLines2(edgesImagePtr,m_Storage,m_Method,rhoRes,thetaRes,threshold,param1,param2);
+	CvSeq* lines = cvHoughLines2(edgesImagePtr,m_Storage,CV_HOUGH_STANDARD,rhoRes,thetaRes,threshold,param1,param2);
 
+	
+	MAPSIOElt* ioEltW = StartWriting(Output("linesObjects"));
 
 	//ReportInfo("\t[Process] Founding lines...");
 	cv::Vec2f foundLine; 
 	int found = findLine(lines,&foundLine);			   //applies HoughLines and chose the best line among all the found in the image
-
-	//ReportInfo("\t[Output] Lines Objects...");
-	MAPSIOElt* ioEltW = StartWriting(Output("linesObjects"));
 		
 	if(found == 0) 
 	{
 		rho = oldLine[0];
-		theta = oldLine[1] ;
+		theta = oldLine[1];
 
 		ReportInfo("\t\t[Process][Lines] No line found...");
 	}
@@ -229,12 +231,12 @@ void MAPSLineFinding::Core()
 		// estimative for the next line
 		oldLine = foundLine;
 		rho = foundLine[0];
-		theta = foundLine[1] ;
+		theta = foundLine[1];
 		
 		ReportInfo("\t\t[Process][Lines] OK, line found...");
 	}
 
-	MAPSDrawingObject& dobj = ioEltW->DrawingObject(1);
+	MAPSDrawingObject& dobj = ioEltW->DrawingObject(0);
 	dobj.kind = MAPSDrawingObject::Line;
 	dobj.color = MAPS_RGB(255,0,0);
 	dobj.width = 1;
@@ -244,20 +246,28 @@ void MAPSLineFinding::Core()
 	{
 		dobj.line.x1 = dobj.line.x2 = cvRound(rho);
 		dobj.line.y1 = 0;
-		dobj.line.y2 = iIPLImage.height;
+		dobj.line.y2 = OUT_IMAGE_H;
 	}
 	else if( fabs(b) < 0.001 )
 	{
 		dobj.line.y1 = dobj.line.y2 = cvRound(rho);
 		dobj.line.x1 = 0;
-		dobj.line.x2 = iIPLImage.width;
+		dobj.line.x2 = OUT_IMAGE_W;
 	}
 	else
 	{
+		/*
 		dobj.line.x1 = 0;
 		dobj.line.y1 = cvRound(rho/b);
 		dobj.line.x2 = cvRound(rho/a);
 		dobj.line.y2 = 0;
+		*/
+
+		double x0 = a*rho, y0 = b*rho;
+		dobj.line.x1 = cvRound(x0 + 1000*(-b));
+		dobj.line.y1 = cvRound(y0 + 1000*(a));
+		dobj.line.x2 = cvRound(x0 - 1000*(-b));
+		dobj.line.y2 = cvRound(y0 - 1000*(a));
 	}
 
 	ioEltW->VectorSize() = 1;
@@ -335,10 +345,10 @@ void MAPSLineFinding::Core()
 
 void MAPSLineFinding::Death()
 {
-	img.release();
-	cut.release();
-	bw.release();
-	canny.release();
+	//img.release();
+	//cut.release();
+	//bw.release();
+	//canny.release();
     if (m_GrayImage.imageData != NULL)
 		delete [] m_GrayImage.imageData;
 	m_GrayImage.imageData = NULL;
