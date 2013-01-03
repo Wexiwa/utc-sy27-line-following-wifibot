@@ -9,6 +9,7 @@
 #include "opencv/cv.h"
 #include "opencv/cxcore.h"
 #include "opencv/highgui.h"
+#include "maps_OpenCV_ErrorHandling.h"
 #define __IPL_H__
 // Includes maps sdk library header
 #include "maps.hpp"
@@ -34,11 +35,12 @@ private :
 	// Place here your specific methods and attributes
 
 	//from opencv4Rtmaps
-	int m_Method;
     bool m_FirstTime;
-    bool m_OutputEdges;
     CvMemStorage* m_Storage;
-    IplImage	  m_GrayImage;
+    IplImage	  m_ImageModel;
+
+	//local
+	CvRect m_ROI;
 
 	//outputs
 	int rho;

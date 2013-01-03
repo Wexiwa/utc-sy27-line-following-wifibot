@@ -74,11 +74,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\maps_LineFinding.cpp" />
+    <ClCompile Include="src\maps_OpenCV_ErrorHandling.cpp" />
     <ClCompile Include="src\maps_package_definition.cpp" />
     <ClCompile Include="src\maps_VisionBasedCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="local_interfaces\maps_LineFinding.h" />
+    <ClInclude Include="local_interfaces\maps_OpenCV_ErrorHandling.h" />
     <ClInclude Include="local_interfaces\maps_VisionBasedCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,11 +1,13 @@
-﻿La génération a démarré 20/12/2012 17:07:12.
+﻿La génération a démarré 03/01/2013 00:58:52.
      1>Projet "C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\src\SY27.u\rtmaps_SY27_vc2008.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
-         Mise à jour de l'horodatage "Release\SY27.unsuccessfulbuild".
+         Création de "Release\SY27.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
        ClCompile:
-         Toutes les sorties sont à jour.
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I./local_interfaces /Zi /nologo /W1 /WX- /O2 /Oy- /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\maps_VisionBasedCommand.cpp
+         maps_VisionBasedCommand.cpp
        Link:
          c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pck" /NOLOGO /LIBPATH:../../lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib rtmaps_ring_buffers.lib rtmaps4wifibot_pck.lib cv210.lib cvaux210.lib cxcore210.lib highgui210.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\SY27.pck.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.lib" /MACHINE:X86 /DLL Release\maps_LineFinding.obj
+         Release\maps_OpenCV_ErrorHandling.obj
          Release\maps_package_definition.obj
          Release\maps_VisionBasedCommand.obj
             Création de la bibliothèque C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.lib et de l'objet C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\SY27.exp
@@ -19,4 +21,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:04.00
+Temps écoulé 00:00:09.62
