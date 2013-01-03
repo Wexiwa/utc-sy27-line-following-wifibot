@@ -57,9 +57,15 @@ void MAPSLineFinding::Birth()
 	// Then we call AllocOutputBufferIplImage method of the concerned output
 	Output("oResultImage").AllocOutputBufferIplImage(model);
 	*/
+	OpenCV_ResetErrors();
 	m_Storage = cvCreateMemStorage(0);
 	m_FirstTime = true;
-	m_GrayImage.imageData = NULL;
+	m_ImageModel.imageData = NULL;
+
+	m_ROI.x = 0;
+	m_ROI.y = 90;
+	m_ROI.width = OUT_IMAGE_W;
+	m_ROI.height = OUT_IMAGE_H;
 }
 
 void MAPSLineFinding::Core() 
@@ -95,18 +101,18 @@ void MAPSLineFinding::Core()
 	{
 	*//*
 		ReportInfo("Processing image...");
-		ReportInfo("\t[Process] ROI...");
+		ReportInfo("[Process] ROI...");
 		cut = img(ROI);						//geting region of interest (cutting upper part and corners
 
-		ReportInfo("\t[Process] Treshold...");
+		ReportInfo("[Process] Treshold...");
 		cv::threshold(cut,bw,200,255, CV_THRESH_BINARY);  // converting to 2 levels image
 		/*
-		ReportInfo("\t[Process] Canny...");
+		ReportInfo("[Process] Canny...");
 		cv::Canny(bw,canny,100,300,3);					  // canny filter
 		
 		//cv::cvtColor(canny, withLines, CV_GRAY2BGR);		  // image that will have the lines draw in color for testing
 		
-		ReportInfo("\t[Process] Founding lines...");
+		ReportInfo("[Process] Founding lines...");
 		cv::Vec2f foundLine; 
 		int found = findLine(canny,&foundLine);			   //applies HoughLines and chose the best line among all the found in the image
 		
@@ -123,7 +129,7 @@ void MAPSLineFinding::Core()
 			pt2.x = cvRound(x0 - 1000*(-b));
 			pt2.y = cvRound(y0 - 1000*(a));
 
-			ReportInfo("\t\t[Process][Lines] No line found...");
+			ReportInfo("[Process][Lines] No line found...");
 
 			//line( withLines, pt1, pt2, Scalar(0,0,255), 2, CV_AA);  //if no line has been found, uses the old one
 		}
@@ -142,7 +148,7 @@ void MAPSLineFinding::Core()
 			pt2.y = cvRound(y0 - 1000*(a));
 			//line( withLines, pt1, pt2, Scalar(0,0,255), 2, CV_AA); //draw line for testing porposes
 
-			ReportInfo("\t\t[Process][Lines] OK, line found...");
+			ReportInfo("[Process][Lines] OK, line found...");
 		}
 		*/
 		
@@ -169,61 +175,58 @@ void MAPSLineFinding::Core()
 		if (*(int*)iIPLImage.channelSeq != MAPS_CHANNELSEQ_GRAY) {
 			Error("This component only accepts GRAY images on its input. (8 bpp)");
 		}
-		m_GrayImage = MAPS::IplImageModel(iIPLImage.width,iIPLImage.height,MAPS_CHANNELSEQ_GRAY);
-		if (m_OutputEdges) {
-			Output("edgesImage").AllocOutputBufferIplImage(m_GrayImage);
-			m_GrayImage.imageData = NULL;
-		} else {
-			m_GrayImage.imageData = new char[m_GrayImage.imageSize];
-		}
+		m_ImageModel = MAPS::IplImageModel(OUT_IMAGE_W,OUT_IMAGE_H,MAPS_CHANNELSEQ_GRAY);
+		Output("edgesImage").AllocOutputBufferIplImage(m_ImageModel);
+		m_ImageModel.imageData = NULL;
 	}
 
 	//ReportInfo("Processing image...");
-	//ReportInfo("\t[Process] ROI...");
-	CvRect roi;
-	roi.x = 0;
-	roi.y = 90;
-	roi.width = OUT_IMAGE_W;
-	roi.height = OUT_IMAGE_H;
+	//ReportInfo("[Process] ROI...");
 
-	IplImage& sub = iIPLImage; //cutted image for the Region of Interest
-
-	getSubImg(&iIPLImage, &sub, roi);
+	IplImage& m_SubImg = iIPLImage; //cut image for the Region of Interest
+	cvSetImageROI(&m_SubImg, m_ROI);
+	//getSubImg(&iIPLImage, &m_SubImg, m_ROI);
 
 	int edgesThreshold1 = 100;
 	int edgesThreshold2 = 300;
 	int edgesAperture = 3;
 
+	/* Start Writing edges image ****************************************************************/
+	
+	//ReportInfo("[Output] Start Writing Edges Image...");
+
 	IplImage* edgesImagePtr;
 	MAPSIOElt* ioEltW2;
-	if (m_OutputEdges) {
-		ioEltW2 = StartWriting(Output("edgesImage"));
-		ioEltW2->Timestamp() = iTimestamp;
-		IplImage& edgesImage = ioEltW2->IplImage();
-		edgesImagePtr = &edgesImage;
-	} else {
-		edgesImagePtr = &m_GrayImage;
-	}
+	ioEltW2 = StartWriting(Output("edgesImage"));
+	IplImage& edgesImage = ioEltW2->IplImage();
+	edgesImagePtr = &edgesImage;
 
-	//ReportInfo("\t[Process] Canny...");	
-	cvCanny(&sub,edgesImagePtr,edgesThreshold1,edgesThreshold2,edgesAperture);
+	//ReportInfo("[Process] Canny...");	
+	cvCanny(&m_SubImg,edgesImagePtr,edgesThreshold1,edgesThreshold2,edgesAperture);
 
-	//ReportInfo("\t[Process] Hough lines...");
+	//ReportInfo("[Process] Hough lines...");
 	CvSeq* lines = cvHoughLines2(edgesImagePtr,m_Storage,CV_HOUGH_STANDARD,rhoRes,thetaRes,threshold,param1,param2);
 
-	
+	cvResetImageROI(&m_SubImg);
+	ioEltW2->Timestamp() = iTimestamp;
+	StopWriting(ioEltW2);
+
+	/* End Writing edges image ******************************************************************/
+
+	/* Start Writing object *********************************************************************/
+
 	MAPSIOElt* ioEltW = StartWriting(Output("linesObjects"));
 
-	//ReportInfo("\t[Process] Founding lines...");
+	//ReportInfo("[Process] Founding lines...");
 	cv::Vec2f foundLine; 
 	int found = findLine(lines,&foundLine);			   //applies HoughLines and chose the best line among all the found in the image
-		
+
 	if(found == 0) 
 	{
 		rho = oldLine[0];
 		theta = oldLine[1];
 
-		ReportInfo("\t\t[Process][Lines] No line found...");
+		ReportInfo("[Process][Lines] No line found...");
 	}
 	else
 	{
@@ -233,8 +236,10 @@ void MAPSLineFinding::Core()
 		rho = foundLine[0];
 		theta = foundLine[1];
 		
-		ReportInfo("\t\t[Process][Lines] OK, line found...");
+		ReportInfo("[Process][Lines] OK, line found...");
 	}
+
+	//ReportInfo("[Output] Start Drawing Object...");
 
 	MAPSDrawingObject& dobj = ioEltW->DrawingObject(0);
 	dobj.kind = MAPSDrawingObject::Line;
@@ -242,7 +247,7 @@ void MAPSLineFinding::Core()
 	dobj.width = 1;
 
 	double a = cos(theta), b = sin(theta);
-	if( fabs(a) < 0.001 )
+	/*if( fabs(a) < 0.001 )
 	{
 		dobj.line.x1 = dobj.line.x2 = cvRound(rho);
 		dobj.line.y1 = 0;
@@ -255,7 +260,7 @@ void MAPSLineFinding::Core()
 		dobj.line.x2 = OUT_IMAGE_W;
 	}
 	else
-	{
+	{*/
 		/*
 		dobj.line.x1 = 0;
 		dobj.line.y1 = cvRound(rho/b);
@@ -268,12 +273,14 @@ void MAPSLineFinding::Core()
 		dobj.line.y1 = cvRound(y0 + 1000*(a));
 		dobj.line.x2 = cvRound(x0 - 1000*(-b));
 		dobj.line.y2 = cvRound(y0 - 1000*(a));
-	}
+	//}
 
 	ioEltW->VectorSize() = 1;
 	ioEltW->Timestamp() = iTimestamp;
 
 	StopWriting(ioEltW);
+
+	/* End Writing object ***********************************************************************/
 
 	MAPSStreamedString oStr;
 	oStr << "OUTPUTS : Rho = " << rho << " | Theta = " << theta;
@@ -349,9 +356,10 @@ void MAPSLineFinding::Death()
 	//cut.release();
 	//bw.release();
 	//canny.release();
-    if (m_GrayImage.imageData != NULL)
-		delete [] m_GrayImage.imageData;
-	m_GrayImage.imageData = NULL;
+    if (m_ImageModel.imageData != NULL)
+		delete [] m_ImageModel.imageData;
+	m_ImageModel.imageData = NULL;
+	OpenCV_ReleaseErrors();
 }
 
 /*

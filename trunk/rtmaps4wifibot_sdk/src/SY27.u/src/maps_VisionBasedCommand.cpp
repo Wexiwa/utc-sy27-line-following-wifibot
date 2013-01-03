@@ -25,6 +25,7 @@ MAPS_BEGIN_PROPERTIES_DEFINITION(MAPSVisionBasedCommand)
     MAPS_PROPERTY("pRho0",0,false,false)
 	MAPS_PROPERTY("pTheta0",0.0,false,false)
 	MAPS_PROPERTY("pSpeed0",12.5,false,false)
+	MAPS_PROPERTY("pIntegral",true,false,false)
 	MAPS_PROPERTY("synch_tolerance",100,false,false)
 MAPS_END_PROPERTIES_DEFINITION
 
@@ -38,7 +39,7 @@ MAPS_COMPONENT_DEFINITION(MAPSVisionBasedCommand,"VisionBasedCommand","1.0",128,
 			  MAPS::Sequential|MAPS::Threaded,MAPS::Threaded,
 			  2, // Nb of inputs
 			  2, // Nb of outputs
-			  4, // Nb of properties
+			  5, // Nb of properties
 			  0) // Nb of actions
 
 void MAPSVisionBasedCommand::Birth()
@@ -125,7 +126,7 @@ cv::Mat MAPSVisionBasedCommand::getCommand(cv::Mat& LTplus, cv::Mat& B, cv::Mat&
 	eStr << "\t[Command] Error = [" << E.at<double>(0,0) << ", " << E.at<double>(1,0) << "]";
 	ReportInfo(MAPSString(eStr));
 
-    m_integralE += E;
+    if(GetBoolProperty("pIntegral") == true) m_integralE += E;
 	
 	MAPSStreamedString ieStr;
 	ieStr << "\t[Command] Integral = [" << m_integralE.at<double>(0,0) << ", " << m_integralE.at<double>(1,0) << "]";
