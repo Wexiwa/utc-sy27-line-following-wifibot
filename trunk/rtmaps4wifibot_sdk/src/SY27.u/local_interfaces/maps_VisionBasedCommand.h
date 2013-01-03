@@ -53,7 +53,7 @@ private :
 	int m_speed_right;
 
 	//inputs
-	unsigned  int m_rho;
+	int m_rho;
 	float m_theta;
 
 	//parameters
