@@ -84,6 +84,22 @@ void MAPSVisionBasedCommand::Core()
 	m_rho = m_ioElts[0]->Integer();
 	m_theta = m_ioElts[1]->Float();
 
+	if(m_rho < 0) {
+		m_rho *= -1;
+		m_theta -= MAPS_PI;
+	}
+
+	if(m_theta > 0) {
+		while(m_theta > MAPS_PI) {
+			m_theta -= MAPS_PI;
+		}
+	}
+	else {
+		while(m_theta < -1*MAPS_PI) {
+			m_theta += MAPS_PI;
+		}
+	}
+
 	MAPSStreamedString iStr;
 	iStr << "INPUTS : Rho = " << m_rho << " | Theta = " << m_theta;
 	ReportInfo(MAPSString(iStr));
