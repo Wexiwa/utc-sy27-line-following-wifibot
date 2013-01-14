@@ -42,26 +42,12 @@ MAPS_COMPONENT_DEFINITION(MAPSLineFinding,"LineFinding","1.0",128,
 
 void MAPSLineFinding::Birth()
 {
-    //img = cv::imread("C:\\Users\\Marcelo\\Documents\\SY27\\data4\\image\\image-0.png",0);
-	//cut = cv::Mat(Size(160 , 140),img.depth(), 3 );
-	//bw = cv::Mat(Size(160 , 140),img.depth(), 3);
-	//canny= cv::Mat(Size(160 , 140),img.depth(), 3 );
-	//ROI = cv::Rect( 0,90, 320,140 );
-	//i=1;
-	/*
-	// The first time we get an image data, we have to allocate the output buffers
-	// To allocate output buffer, we first define the model of images (dimensions and color)
-	IplImage model;
-	model=MAPS::IplImageModel(canny.size().width,canny.size().height,MAPS_COLORMODEL_RGB);
-	//model=MAPS::IplImageModel(640,480,MAPS_COLORMODEL_YUV);
-	// Then we call AllocOutputBufferIplImage method of the concerned output
-	Output("oResultImage").AllocOutputBufferIplImage(model);
-	*/
 	OpenCV_ResetErrors();
 	m_Storage = cvCreateMemStorage(0);
 	m_FirstTime = true;
-	m_ImageModel.imageData = NULL;
+	m_GrayImage.imageData = NULL;
 
+	//region of interest for cutting the image
 	m_ROI.x = 0;
 	m_ROI.y = 90;
 	m_ROI.width = OUT_IMAGE_W;
@@ -86,98 +72,21 @@ void MAPSLineFinding::Core()
 	//		- the time of issue of the data (availability time in RTMaps)
 	//MAPSTimestamp &iTimeOfIssue=iIOEltImage->TimeOfIssue();
 
-	/*
-	cvSaveImage("C:\\Users\\Maxime\\Desktop\\nand\\foo.png",&iIPLImage);
-	ReportInfo("Converting IplImage to Mat...");
-	cv::Mat img = cv::Mat(&iIPLImage, true); //cvarrToMat(&iIPLImage);
-	//IplImage i = img;
-	*/
-
-	//cvSaveImage("C:\\Users\\Maxime\\Desktop\\nand\\foo.png",&i);
-	//cv::imwrite("C:\\Users\\Maxime\\Desktop\\nand\\foo2.png", img);
-
-	/*
-	while(!img.empty())
-	{
-	*//*
-		ReportInfo("Processing image...");
-		ReportInfo("[Process] ROI...");
-		cut = img(ROI);						//geting region of interest (cutting upper part and corners
-
-		ReportInfo("[Process] Treshold...");
-		cv::threshold(cut,bw,200,255, CV_THRESH_BINARY);  // converting to 2 levels image
-		/*
-		ReportInfo("[Process] Canny...");
-		cv::Canny(bw,canny,100,300,3);					  // canny filter
-		
-		//cv::cvtColor(canny, withLines, CV_GRAY2BGR);		  // image that will have the lines draw in color for testing
-		
-		ReportInfo("[Process] Founding lines...");
-		cv::Vec2f foundLine; 
-		int found = findLine(canny,&foundLine);			   //applies HoughLines and chose the best line among all the found in the image
-		
-		if(found == 0){ // when no line is found use the last found line for calculation
-			rho = oldLine[0];
-			theta = oldLine[1] ;
-			
-			cv::Point pt1,pt2;
-			double a = cos(theta), b = sin(theta);
-			double x0 = a*rho, y0 = b*rho;
-
-			pt1.x = cvRound(x0 + 1000*(-b));  //calculating points to draw the las found line
-			pt1.y = cvRound(y0 + 1000*(a));
-			pt2.x = cvRound(x0 - 1000*(-b));
-			pt2.y = cvRound(y0 - 1000*(a));
-
-			ReportInfo("[Process][Lines] No line found...");
-
-			//line( withLines, pt1, pt2, Scalar(0,0,255), 2, CV_AA);  //if no line has been found, uses the old one
-		}
-		else{  //if we found a line we save it in an variable in case we don't find one in the next event, and we have an good
-					// estimative for the next line
-			oldLine = foundLine;
-			double rho = foundLine[0], theta = foundLine[1] ;
-		
-			cv::Point pt1,pt2;
-			double a = cos(theta), b = sin(theta);
-			double x0 = a*rho, y0 = b*rho;
-
-			pt1.x = cvRound(x0 + 1000*(-b));	//calculating points to dwar the found line
-			pt1.y = cvRound(y0 + 1000*(a));
-			pt2.x = cvRound(x0 - 1000*(-b));
-			pt2.y = cvRound(y0 - 1000*(a));
-			//line( withLines, pt1, pt2, Scalar(0,0,255), 2, CV_AA); //draw line for testing porposes
-
-			ReportInfo("[Process][Lines] OK, line found...");
-		}
-		*/
-		
-		/*
-		sprintf(filename,"C:\\Users\\Marcelo\\Documents\\SY27\\data4\\image\\image-%d.png",i); //calculating new filename
-		img = cv::imread(filename, 0);
-		i++;
-
-		if(i>=518) break;
-		char c= cv::waitKey(1);					  // frame rate defined for testing a sequence of images
-		if(c==27) break;						  //stop when ESC is pressed
-	}						  //stop when ESC is pressed
-
-	*/
-
+	//parameters for the Houghlines function
 	double rhoRes = 1;
 	double thetaRes = MAPS_PI/180;
 	int threshold = 30;
 	double param1=0.0, param2=0.0;
 	cvClearMemStorage( m_Storage );
 	
-	if (m_FirstTime) {
+	if (m_FirstTime) {//condition for first time execution
 		m_FirstTime = false;
 		if (*(int*)iIPLImage.channelSeq != MAPS_CHANNELSEQ_GRAY) {
 			Error("This component only accepts GRAY images on its input. (8 bpp)");
 		}
-		m_ImageModel = MAPS::IplImageModel(OUT_IMAGE_W,OUT_IMAGE_H,MAPS_CHANNELSEQ_GRAY);
-		Output("edgesImage").AllocOutputBufferIplImage(m_ImageModel);
-		m_ImageModel.imageData = NULL;
+		m_GrayImage = MAPS::IplImageModel(OUT_IMAGE_W,OUT_IMAGE_H,MAPS_CHANNELSEQ_GRAY);
+		Output("edgesImage").AllocOutputBufferIplImage(m_GrayImage);
+		m_GrayImage.imageData = NULL;
 	}
 
 	//ReportInfo("Processing image...");
@@ -185,8 +94,8 @@ void MAPSLineFinding::Core()
 
 	IplImage& m_SubImg = iIPLImage; //cut image for the Region of Interest
 	cvSetImageROI(&m_SubImg, m_ROI);
-	//getSubImg(&iIPLImage, &m_SubImg, m_ROI);
 
+	//parameters for canny filter (edge detecting)
 	int edgesThreshold1 = 100;
 	int edgesThreshold2 = 300;
 	int edgesAperture = 3;
@@ -202,9 +111,11 @@ void MAPSLineFinding::Core()
 	edgesImagePtr = &edgesImage;
 
 	//ReportInfo("[Process] Canny...");	
+	//calculating edges image
 	cvCanny(&m_SubImg,edgesImagePtr,edgesThreshold1,edgesThreshold2,edgesAperture);
 
 	//ReportInfo("[Process] Hough lines...");
+	// hough lines function call
 	CvSeq* lines = cvHoughLines2(edgesImagePtr,m_Storage,CV_HOUGH_STANDARD,rhoRes,thetaRes,threshold,param1,param2);
 
 	cvResetImageROI(&m_SubImg);
@@ -218,11 +129,15 @@ void MAPSLineFinding::Core()
 	MAPSIOElt* ioEltW = StartWriting(Output("linesObjects"));
 
 	//ReportInfo("[Process] Founding lines...");
+	//best line found of all the lines found by hough lines
 	cv::Vec2f foundLine; 
-	int found = findLine(lines,&foundLine);			   //applies HoughLines and chose the best line among all the found in the image
+	//choses the bet line among all found by hough.
+	int found = findLine(lines,&foundLine);		
 
+	//in case no line was found, take parameters from previous line
 	if(found == 0) 
 	{
+		//taking parameters fron ancient line
 		rho = oldLine[0];
 		theta = oldLine[1];
 
@@ -240,40 +155,19 @@ void MAPSLineFinding::Core()
 	}
 
 	//ReportInfo("[Output] Start Drawing Object...");
-
+	//writing line in the object output.
 	MAPSDrawingObject& dobj = ioEltW->DrawingObject(0);
 	dobj.kind = MAPSDrawingObject::Line;
 	dobj.color = MAPS_RGB(255,0,0);
 	dobj.width = 1;
 
 	double a = cos(theta), b = sin(theta);
-	/*if( fabs(a) < 0.001 )
-	{
-		dobj.line.x1 = dobj.line.x2 = cvRound(rho);
-		dobj.line.y1 = 0;
-		dobj.line.y2 = OUT_IMAGE_H;
-	}
-	else if( fabs(b) < 0.001 )
-	{
-		dobj.line.y1 = dobj.line.y2 = cvRound(rho);
-		dobj.line.x1 = 0;
-		dobj.line.x2 = OUT_IMAGE_W;
-	}
-	else
-	{*/
-		/*
-		dobj.line.x1 = 0;
-		dobj.line.y1 = cvRound(rho/b);
-		dobj.line.x2 = cvRound(rho/a);
-		dobj.line.y2 = 0;
-		*/
 
-		double x0 = a*rho, y0 = b*rho;
-		dobj.line.x1 = cvRound(x0 + 1000*(-b));
-		dobj.line.y1 = cvRound(y0 + 1000*(a));
-		dobj.line.x2 = cvRound(x0 - 1000*(-b));
-		dobj.line.y2 = cvRound(y0 - 1000*(a));
-	//}
+	double x0 = a*rho, y0 = b*rho;
+	dobj.line.x1 = cvRound(x0 + 1000*(-b));
+	dobj.line.y1 = cvRound(y0 + 1000*(a));
+	dobj.line.x2 = cvRound(x0 - 1000*(-b));
+	dobj.line.y2 = cvRound(y0 - 1000*(a));
 
 	ioEltW->VectorSize() = 1;
 	ioEltW->Timestamp() = iTimestamp;
@@ -299,119 +193,15 @@ void MAPSLineFinding::Core()
 	ioEltOut->Timestamp() = iTimestamp;
 	StopWriting(ioEltOut);
 	
-	/*
-	// Ask for a new output data
-	MAPSIOElt* oIOEltImage=StartWriting(Output("oResultImage"));	
-	oIOEltImage->Timestamp()=iTimestamp;
-
-	//Convert to IplImage
-	IplImage ipl = cut;
-	IplImage &oIPLImage=oIOEltImage->IplImage();
-
-	// Get pointers to the first pixel of input and output images
-	unsigned char *ib=(unsigned char*)ipl.imageData;
-	unsigned char *ob=(unsigned char*)oIPLImage.imageData;
-	int u,v;
-	for(v=0;v<iIPLImage.height;v++)
-	{
-		// Get pointers to the first pixel of line number v of input and output images
-		unsigned char *ibb=ib+iIPLImage.widthStep*v;
-		unsigned char *obb=ob+oIPLImage.widthStep*v;
-		for(u=0;u<iIPLImage.width;u++)
-		{
-			obb[u]=ibb[u];
-		}		
-	}
-
-	StopWriting(oIOEltImage);
-	*/
 }
-
-//bool MAPSLineFinding::compareLines(Vec2f i,Vec2f j){ //function used to compare 2 lines so sort function can work and we can find the median
-//	double theta1 = i[1];
-//	double theta2 = j[1];
-//	double alpha1,alpha2; //angles that will be effectivly be used for comparing, it's the angle of the line with the lower part of the image
-//	if((theta1<CV_PI/2 && theta1>-CV_PI/2) || (theta1>CV_PI  && theta1<3*CV_PI/2))
-//			alpha1 = abs(theta1+CV_PI/2);
-//
-//	else
-//		alpha1 = abs(theta1-CV_PI/2);
-//		
-//	if(theta2<CV_PI/2 && theta2>-CV_PI/2 || (theta2>CV_PI  && theta2<3*CV_PI/2))
-//			alpha2 = abs(theta2+CV_PI/2);
-//		
-//	else
-//			alpha2 = abs(theta2-CV_PI/2);
-//
-//	return (alpha1<alpha2);
-//		
-//
-//	
-//	
-//}
 
 void MAPSLineFinding::Death()
 {
-	//img.release();
-	//cut.release();
-	//bw.release();
-	//canny.release();
-    if (m_ImageModel.imageData != NULL)
-		delete [] m_ImageModel.imageData;
-	m_ImageModel.imageData = NULL;
+	if (m_GrayImage.imageData != NULL)
+		delete [] m_GrayImage.imageData;
+	m_GrayImage.imageData = NULL;
 	OpenCV_ReleaseErrors();
 }
-
-/*
-cv::Vec2f MAPSLineFinding::findMedian(vector<Vec2f> lines, int counter){
-	sort(lines.begin(),lines.begin() + counter, myobject); //sort the lines using the function compareLines
-
-	return lines[(int) counter/2];
-
-}
-
-
-int MAPSLineFinding::findLine (Mat img, Vec2f *finalLine ){ // receives an image after it's been filtered by canny's filter.
-										// returns 0 if no line has been found
-		
-		int lineCounter=0;				//counter for good lines to calculate de average
-		int x1=0,x2=0,y1=0,y2=0,temp,maxIndex,minIndex;		//accumulators to calculate the average
-		vector<Vec2f> lines;
-
-		cv::HoughLines(img,lines,1, CV_PI/90, 34, 0, 0 );  //calling houghLines - line detector function
-		std::vector<cv::Vec2f> goodLines(lines.size(),0); //vector used for saving the lines with an good inclination
-
-		for( size_t i = 0; i < lines.size(); i++ ) //loop to find one good line out of the many calculated by houghLines
-		{
-			
-		    double  theta = lines[i][1] ;
-			if((theta< 0.2*CV_PI && theta>  -0.2*CV_PI) ||(theta< 1.2*CV_PI && theta>  0.8*CV_PI) || (theta<- 0.8*CV_PI && theta > - 1.2*CV_PI)){ // if line is vertical enough
-				goodLines[lineCounter] = lines[i];
-				
-				lineCounter++;
-				
-				
-					
-		}	
-    }	
-
-		if(lineCounter == 0) //no good line found
-			return 0; // code for when no lines are found
-		
-		
-		if(lineCounter == 1){
-			*finalLine = goodLines[0];
-			return 1;
-		}
-		else{//find the  median line (comparing by the angle formed by the line with the lower part of the image
-			*finalLine = findMedian(goodLines,lineCounter);
-			return 1;
-		}
-
-		return 0; //code for when no lines are found
-}
-
-*/
 
 cv::Vec2f MAPSLineFinding::findMedian(vector<Vec2f> lines, int counter){
 	sort(lines.begin(),lines.begin() + counter, myobject); //sort the lines using the function compareLines
@@ -433,6 +223,7 @@ int MAPSLineFinding::findLine (CvSeq* lines, Vec2f *finalLine){ // receives an i
 			float* line = (float*)cvGetSeqElem(lines,i);
 		    double  theta = line[1];
 			double rho = line[0];
+			//condition to see if line is vertical enough
 			if((theta< 0.2*CV_PI && theta>  -0.2*CV_PI) ||(theta< 1.2*CV_PI && theta>  0.8*CV_PI) || (theta<- 0.8*CV_PI && theta > - 1.2*CV_PI)){ // if line is vertical enough
 				goodLines[lineCounter][0] = rho;
 				goodLines[lineCounter][1] = theta;
@@ -445,7 +236,7 @@ int MAPSLineFinding::findLine (CvSeq* lines, Vec2f *finalLine){ // receives an i
 		if(lineCounter == 0) //no good line found
 			return 0; // code for when no lines are found
 		
-		
+		//in case only one line was found, return this line, to avoid errors in sorting function
 		if(lineCounter == 1){
 			*finalLine = goodLines[0];
 			return 1;
@@ -456,13 +247,4 @@ int MAPSLineFinding::findLine (CvSeq* lines, Vec2f *finalLine){ // receives an i
 		}
 
 		return 0; //code for when no lines are found
-}
-
-void MAPSLineFinding::getSubImg(IplImage* img, IplImage* subImg, CvRect roiRect) {
- 
-	cvSetImageROI(img, roiRect);
-	subImg = cvCreateImage(cvGetSize(img), img->depth, img->nChannels);
-	cvCopy(img, subImg, NULL);
-	cvResetImageROI(img);
- 
 }
