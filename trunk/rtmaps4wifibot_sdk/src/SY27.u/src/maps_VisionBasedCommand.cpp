@@ -175,7 +175,7 @@ cv::Mat MAPSVisionBasedCommand::getCommand(cv::Mat& LTplus, cv::Mat& B, cv::Mat&
 	sStr << "\t[Command] Speed = [" <<  Speed.at<double>(0,0) << ", " << Speed.at<double>(1,0) << "]";
 	ReportInfo(MAPSString(sStr));
 
-    //unecessary because the RTMaps block for controlling the Wifibot (wifibot_serial) is doing this cheking already
+    //unecessary because the RTMaps block for controlling the Wifibot (wifibot_serial) is doing this checking already
 	//if(abs(Speed.at<double>(0,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(0,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(0,0) > 0 ? 1 : -1);
     //if(abs(Speed.at<double>(1,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(1,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(1,0) > 0 ? 1 : -1);
     
