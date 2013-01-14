@@ -1,0 +1,96 @@
+﻿La génération a démarré 20/12/2012 17:07:12.
+     1>Projet "C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\src\samples.u\rtmaps_samples_vc2008.vcxproj" sur le nœud 3 (build cible(s)).
+     1>InitializeBuildStatus:
+         Mise à jour de l'horodatage "Release\rtmaps_samples.unsuccessfulbuild".
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /Ilocal_interfaces /Zi /nologo /W1 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D rtmaps_samples_EXPORTS /D _CRT_SECURE_NO_DEPRECATE /D _WINDLL /D _MBCS /GF /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\maps_CANReader.cpp src\maps_CANWriter.cpp src\maps_ComponentWithActions.cpp src\maps_DynamicInputs.cpp src\maps_FusionSampleWithMultipleStartReading.cpp src\maps_FusionSampleWithSamplingReaders.cpp src\maps_ImageGenerator.cpp src\maps_ImageHeaderDisplay.cpp src\maps_ImageProcessing1Src1DestSample.cpp src\maps_ImageProcessing2Src1DestSample.cpp src\maps_MonoVisionIPUSample.cpp src\maps_MultiThread.cpp src\maps_MultiThreadAndSynchronisation.cpp src\maps_ROIThreshold.cpp src\maps_SetProperty_Overload.cpp src\maps_StereoVisionIPUSample.cpp src\maps_Stream8IOSample.cpp src\maps_Threshold.cpp src\maps_UserStructureInput.cpp src\maps_UserStructureOutput.cpp src\maps_counter.cpp src\maps_customclock.cpp src\maps_enum_props.cpp src\maps_multiplier_1.cpp src\maps_multiplier_2.cpp src\maps_multiplier_3.cpp src\maps_multiplier_4.cpp src\maps_rs232sensor.cpp src\maps_rs232sensorWithOutput.cpp src\maps_simple_imageprocessing.cpp src\maps_synchronizer.cpp src\maps_vectorizer_sample_0_ERROR_TO_BANISH.cpp src\maps_vectorizer_sample_1_triggered.cpp src\maps_vectorizer_sample_2_reactive.cpp src\maps_vectorizer_sample_3_resampling.cpp src\maps_vectorizer_sample_4_resynchronizer.cpp src\maps_vectorizer_sample_5_generic.cpp
+         maps_CANReader.cpp
+         maps_CANWriter.cpp
+         maps_ComponentWithActions.cpp
+         maps_DynamicInputs.cpp
+         maps_FusionSampleWithMultipleStartReading.cpp
+         maps_FusionSampleWithSamplingReaders.cpp
+         maps_ImageGenerator.cpp
+         maps_ImageHeaderDisplay.cpp
+         maps_ImageProcessing1Src1DestSample.cpp
+         maps_ImageProcessing2Src1DestSample.cpp
+         maps_MonoVisionIPUSample.cpp
+         maps_MultiThread.cpp
+         maps_MultiThreadAndSynchronisation.cpp
+         maps_ROIThreshold.cpp
+         maps_SetProperty_Overload.cpp
+         maps_StereoVisionIPUSample.cpp
+         maps_Stream8IOSample.cpp
+         maps_Threshold.cpp
+         maps_UserStructureInput.cpp
+         maps_UserStructureOutput.cpp
+         Génération de code en cours...
+         Compilation en cours...
+         maps_counter.cpp
+         maps_customclock.cpp
+         maps_enum_props.cpp
+         maps_multiplier_1.cpp
+         maps_multiplier_2.cpp
+         maps_multiplier_3.cpp
+         maps_multiplier_4.cpp
+         maps_rs232sensor.cpp
+         maps_rs232sensorWithOutput.cpp
+         maps_simple_imageprocessing.cpp
+         maps_synchronizer.cpp
+         maps_vectorizer_sample_0_ERROR_TO_BANISH.cpp
+         maps_vectorizer_sample_1_triggered.cpp
+         maps_vectorizer_sample_2_reactive.cpp
+         maps_vectorizer_sample_3_resampling.cpp
+         maps_vectorizer_sample_4_resynchronizer.cpp
+         maps_vectorizer_sample_5_generic.cpp
+         Génération de code en cours...
+       Link:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.pck" /NOLOGO /LIBPATH:../../lib rtmaps_ring_buffers.lib rtmaps_ring_buffers.lib rtmaps4wifibot_pck.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\rtmaps_samples.pck.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.pdb" /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.lib" /MACHINE:X86 /DLL Release\maps_multiplier_1.obj
+         Release\maps_multiplier_2.obj
+         Release\maps_multiplier_3.obj
+         Release\maps_multiplier_4.obj
+         Release\maps_vectorizer_sample_0_ERROR_TO_BANISH.obj
+         Release\maps_vectorizer_sample_1_triggered.obj
+         Release\maps_vectorizer_sample_2_reactive.obj
+         Release\maps_vectorizer_sample_3_resampling.obj
+         Release\maps_vectorizer_sample_4_resynchronizer.obj
+         Release\maps_vectorizer_sample_5_generic.obj
+         Release\maps_FusionSampleWithMultipleStartReading.obj
+         Release\maps_FusionSampleWithSamplingReaders.obj
+         Release\maps_ImageGenerator.obj
+         Release\maps_ImageHeaderDisplay.obj
+         Release\maps_MonoVisionIPUSample.obj
+         Release\maps_simple_imageprocessing.obj
+         Release\maps_StereoVisionIPUSample.obj
+         Release\maps_ImageProcessing1Src1DestSample.obj
+         Release\maps_ImageProcessing2Src1DestSample.obj
+         Release\maps_ROIThreshold.obj
+         Release\maps_Threshold.obj
+         Release\maps_CANReader.obj
+         Release\maps_CANWriter.obj
+         Release\maps_ComponentWithActions.obj
+         Release\maps_counter.obj
+         Release\maps_DynamicInputs.obj
+         Release\maps_enum_props.obj
+         Release\maps_SetProperty_Overload.obj
+         Release\maps_UserStructureInput.obj
+         Release\maps_UserStructureOutput.obj
+         Release\maps_MultiThread.obj
+         Release\maps_MultiThreadAndSynchronisation.obj
+         Release\maps_rs232sensor.obj
+         Release\maps_rs232sensorWithOutput.obj
+         Release\maps_Stream8IOSample.obj
+         Release\maps_customclock.obj
+         Release\maps_synchronizer.obj
+            Création de la bibliothèque C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.lib et de l'objet C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.exp
+         rtmaps_samples_vc2008.vcxproj -> C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.pck
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\Release\rtmaps_samples.pck;#2" /manifest Release\rtmaps_samples.pck.intermediate.manifest
+       FinalizeBuildStatus:
+         Suppression du fichier "Release\rtmaps_samples.unsuccessfulbuild".
+         Mise à jour de l'horodatage "Release\rtmaps_samples.lastbuildstate".
+     1>Génération du projet "C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\src\samples.u\rtmaps_samples_vc2008.vcxproj" terminée (build cible(s)).
+
+La génération a réussi.
+
+Temps écoulé 00:01:02.43

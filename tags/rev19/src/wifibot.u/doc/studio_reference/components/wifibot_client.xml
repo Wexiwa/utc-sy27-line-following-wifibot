@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ComponentResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="wifibot_client" xsi:noNamespaceSchemaLocation="ComponentResources.xsd">
+<Type>Component</Type>
+<IconFile>wifibot_icon.png</IconFile>
+<TargetOS>OS-independant</TargetOS>
+<Lang lang="ENG">
+<GroupName>Wifibot</GroupName>
+<Documentation>
+<Component>
+<Alias>Wifibot TCP client</Alias>
+<Description><![CDATA[<p>This component allows to control a Wifibot 4G remotely via the embedded wifibot
+TCP server.</p>
+<p>It provides a simple way to send commands to the Wifibot left and right motors,
+and retrieves periodically some standard sensors infos like battery level, odometers
+and infrared sensors data.</p>]]></Description>
+</Component>
+<Property MAPSName="wifibot_ip_address">
+<Alias>Wifibot IP address</Alias>
+<Description><![CDATA[Set here the IP address of your wifibot.]]></Description>
+<DefaultValue>127.0.0.1</DefaultValue>
+</Property>
+<Property MAPSName="wifibot_port">
+<Alias>Wifibot port</Alias>
+<Description><![CDATA[Set here the port of the wifibot server running on the robot. (Refer to
+the wifibot documentation, usually 15000 or 15020).
+]]></Description>
+<DefaultValue>15020</DefaultValue>
+</Property>
+<Property MAPSName="input_mode">
+<Alias>Input mode</Alias>
+<Description><![CDATA[Defines the way this component receives left and right motors commands on its
+input(s):
+<ul>
+<li>Vectorized: the component will have only 1 input and expects on it a vector
+of 2 integers with the left and right motor speeds (values from 0 to 60).
+<li>Left/Right separated: the component will have 2 inputs (left speed and 
+right speed) and expects on each of them a scalar containing the required value
+for the corresponding motor (from 0 to 60).
+</ul>]]></Description>
+<DefaultValue>Vectorized</DefaultValue>
+</Property>
+<Property MAPSName="closed_loop_speed_control">
+<Alias>Closed loop speed control</Alias>
+<Description><![CDATA[Activates or not the closed loop speed control on the wifibot.]]></Description>
+<DefaultValue>true</DefaultValue>
+</Property>
+<Property MAPSName="send_cmds_period">
+<Alias>Send commands period</Alias>
+<Description><![CDATA[Period (in microseconds) at which the motors commands are sent to the wifibot.
+If the wifibot does not receive commmands in a certain period of time, it just
+stops. So this component periodically repeats the last known commands in case no
+new command has arrived in the specified period.]]></Description>
+<DefaultValue>50000</DefaultValue>
+</Property>
+<Output MAPSName="battery">
+<Alias>Batt level</Alias>
+<Description><![CDATA[Battery level (0-255)]]></Description>
+</Output>
+<Output MAPSName="odometers">
+<Alias>Odometers</Alias>
+<Description><![CDATA[Vector of 4 integers:
+<ul>
+<li>Front left wheel speed (0-40 ticks/41ms)
+<li>Rear left wheel speed (0-40 ticks/41ms)
+<li>Front right wheel speed (0-40 ticks/41ms)
+<li>Rear right speed (0-40 ticks/41ms)
+</ul>]]></Description>
+</Output>
+<Output MAPSName="infrared">
+<Alias>Infrared</Alias>
+<Description><![CDATA[Vector of 2 integers:
+<ul>
+<li>Left infrared sensor (0-150 cm)
+<li>Right infrared sensor (0-150 cm)
+</ul>]]></Description>
+</Output>
+<Input MAPSName="ileft_speed">
+<Alias>Left speed</Alias>
+<Description><![CDATA[Speed value for the left motor.]]></Description>
+</Input>
+<Input MAPSName="iright_speed">
+<Alias>Right speed</Alias>
+<Description><![CDATA[Speed value for the right motor.]]></Description>
+</Input>
+<Input MAPSName="ileft_and_right_speeds">
+<Alias>Left/Right speeds</Alias>
+<Description><![CDATA[Vector of 2 integers containing the speeds for the left and right motors.]]></Description>
+</Input>
+</Documentation>
+</Lang>
+</ComponentResources>

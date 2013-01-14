@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ComponentResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="keyboard_4_wifibot" xsi:noNamespaceSchemaLocation="ComponentResources.xsd">
+<Type>Component</Type>
+<IconFile>wifibot_icon.png</IconFile>
+<TargetOS>OS-independant</TargetOS>
+<Lang lang="ENG">
+<GroupName>Wifibot</GroupName>
+<Documentation>
+<Component>
+<Alias>Keyboard for Wifibot</Alias>
+<Description><![CDATA[<p>This component allows to transform virtual key codes from the Keyboard component
+into left and right motors commands to be sent to the wifibot.</p>
+<p>Along with the Wifibot client (for remote control), or the Wifibot control (for 
+on-board control), it can be used to control a wifibot with a keyboard.</p>
+<p>
+<p>The component has series of triplet properties: "input_code_X", "input_code_X_left_speed",
+"input_code_X_right_speed". When value specified in "input_code_X" is received,
+the value specified in "input_code_X_left_speed" and "input_code_X_right_speed" are
+used to refresh the component outputs, so that the corresponding command can be
+sent to the robot.</p>]]></Description>
+</Component>
+<Property MAPSName="output_mode">
+<Alias>Output mode</Alias>
+<Description><![CDATA[Defines the way left and right motor commands are sent on the component outputs,
+either on a single output as a vector of 2 elements, or as scalars on 2 separated
+outputs.]]></Description>
+<DefaultValue>Vectorized</DefaultValue>
+</Property>
+<Property MAPSName="input_code_1">
+<Alias>input_code_1</Alias>
+<Description><![CDATA[Up arrow key.]]></Description>
+<DefaultValue>200</DefaultValue>
+</Property>
+<Property MAPSName="input_code_1_left_speed">
+<Alias>input_code_1_left_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_1_right_speed">
+<Alias>input_code_1_right_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_2">
+<Alias>input_code_2</Alias>
+<Description><![CDATA[Down arrow key]]></Description>
+<DefaultValue>208</DefaultValue>
+</Property>
+<Property MAPSName="input_code_2_left_speed">
+<Alias>input_code_2_left_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_2_right_speed">
+<Alias>input_code_2_right_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_3">
+<Alias>input_code_3</Alias>
+<Description><![CDATA[Left arrow key]]></Description>
+<DefaultValue>203</DefaultValue>
+</Property>
+<Property MAPSName="input_code_3_left_speed">
+<Alias>input_code_3_left_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_3_right_speed">
+<Alias>input_code_3_right_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_4">
+<Alias>input_code_4</Alias>
+<Description><![CDATA[Right arrow key]]></Description>
+<DefaultValue>205</DefaultValue>
+</Property>
+<Property MAPSName="input_code_4_left_speed">
+<Alias>input_code_4_left_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_4_right_speed">
+<Alias>input_code_4_right_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_5">
+<Alias>input_code_5</Alias>
+<Description><![CDATA[Space bar]]></Description>
+<DefaultValue>32</DefaultValue>
+</Property>
+<Property MAPSName="input_code_5_left_speed">
+<Alias>input_code_5_left_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="input_code_5_right_speed">
+<Alias>input_code_5_right_speed</Alias>
+<Description/>
+</Property>
+<Property MAPSName="any_other_code">
+<Alias>any_other_code</Alias>
+<Description><![CDATA[Defines the behaviour when a non-specified code is received on the component:
+it can be ignored (the component keeps on sending the last known valid commands),
+or it can stop the robot (commands 0,0 are sent to the left and right motors outputs).]]></Description>
+</Property>
+<Property MAPSName="nb_additional_configs">
+<Alias>nb_additional_configs</Alias>
+<Description><![CDATA[Increase that number if you want to add additional input codes with corresponding
+left and right motor commands.]]></Description>
+<DefaultValue>0</DefaultValue>
+</Property>
+<Output MAPSName="left_and_right_motor_speeds">
+<Alias>Left/Right motor speeds</Alias>
+<Description><![CDATA[Vector of 2 integers containings the commands for the left and right motors.]]></Description>
+</Output>
+<Input MAPSName="input_code">
+<Alias>Input code</Alias>
+<Description><![CDATA[Input code to be tested over the "input_code_X" properties.]]></Description>
+</Input>
+</Documentation>
+</Lang>
+</ComponentResources>
