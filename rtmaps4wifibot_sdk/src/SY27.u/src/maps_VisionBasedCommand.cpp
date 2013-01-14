@@ -22,8 +22,8 @@ MAPS_END_OUTPUTS_DEFINITION
 
 // Use the macros to declare the properties
 MAPS_BEGIN_PROPERTIES_DEFINITION(MAPSVisionBasedCommand)
-    MAPS_PROPERTY("pRho0",0,false,false)
-	MAPS_PROPERTY("pTheta0",0.0,false,false)
+    MAPS_PROPERTY("pRho0",90,false,false)
+	MAPS_PROPERTY("pTheta0",MAPS_PI,false,false)
 	MAPS_PROPERTY("pSpeed0",12.5,false,false)
 	MAPS_PROPERTY("pIntegral",true,false,false)
 	MAPS_PROPERTY("synch_tolerance",100,false,false)
@@ -84,25 +84,83 @@ void MAPSVisionBasedCommand::Core()
 	m_rho = m_ioElts[0]->Integer();
 	m_theta = m_ioElts[1]->Float();
 
-	if(m_rho < 0) {
-		m_rho *= -1;
-		m_theta -= MAPS_PI;
-	}
-
-	if(m_theta > 0) {
-		while(m_theta > MAPS_PI) {
-			m_theta -= MAPS_PI;
-		}
-	}
-	else {
-		while(m_theta < -1*MAPS_PI) {
-			m_theta += MAPS_PI;
-		}
-	}
-
 	MAPSStreamedString iStr;
-	iStr << "INPUTS : Rho = " << m_rho << " | Theta = " << m_theta;
+	iStr << "INPUTS (from HoughLines) : Rho = " << m_rho << " | Theta = " << m_theta;
 	ReportInfo(MAPSString(iStr));
+
+	// now we have to translate houglines polar coordinate (from upper-left corner) to our polar coordinate (center of the image)
+
+	// due to the polar coordinate we have to
+    // take the sign of the radius into account
+    // in order to not disturb the command calculation
+    if(m_rho < 0) {
+        m_rho *= -1;
+        m_theta -= MAPS_PI;
+    }
+
+    // it's the same for the multiple value of theta
+    // which could point out the same position
+    // so we have to use the modulo of PI
+    // (we get an result within [-PI; PI]
+    if(m_theta > 0) {
+        m_theta = fmod(m_theta+MAPS_PI, 2*MAPS_PI)-MAPS_PI;
+    }
+    else {
+        m_theta = fmod(m_theta-MAPS_PI, 2*MAPS_PI)+MAPS_PI;
+    }
+        
+    // line equation (the normal) : x*cos(?) + y*sin(?) = r
+    
+	//the image size is 320x140, so the center is at :
+    int w = 159;
+    int h = 69;
+        
+    //compute the crossing point between the line and the Y axis (i.e the middle-width of the image)
+    int xOrd = w;
+    int yOrd = (m_rho-xOrd*cos(m_theta))/sin(m_theta);
+        
+    //compute the crossing point between the line and the X axis (i.e the middle-height of the image)
+    int yAbs = h;
+    int xAbs = (m_rho-yAbs*sin(m_theta))/cos(m_theta);
+        
+    // then we compute the image of the origine (0,0) on this line
+    /* 
+        * http://www.exaflop.org/docs/cgafaq/cga1.html#Subject%201.02:%20How%20do%20I%20find%20the%20distance%20from%20a%20point%20to%20a%20line? 
+        * 
+        * Let the point be C (Cx,Cy) and the line be AB (Ax,Ay) to (Bx,By).
+        * The length of the line segment AB is L:
+        * 
+        * L= sqrt( (Bx-Ax)^2 + (By-Ay)^2 )
+        * 
+        * Let P be the point of perpendicular projection of C onto AB.
+        * Let r be a parameter to indicate P's location along the line containing AB:
+        * 
+        *      (Ay-Cy)(Ay-By)-(Ax-Cx)(Bx-Ax)
+        * r = -----------------------------
+        *                  L^2
+        * 
+        * The point P can then be found:
+        * Px = Ax + r(Bx-Ax)
+        * Py = Ay + r(By-Ay)
+        */
+
+    float L = sqrt( pow((float) xOrd-xAbs, 2) + pow((float) yOrd-yAbs, 2) );
+    float r = ((yAbs-h)*(yAbs-yOrd)-(xAbs-w)*(xOrd-xAbs))/pow(L, 2);
+        
+    int x = cvRound(xAbs + r*(xOrd-xAbs));
+    int y = cvRound(yAbs + r*(yOrd-yAbs));
+
+	 // calulating the point and converting the coordinate
+    x = xImgToChart(x, w);
+    y = yImgToChart(y, h);
+       
+    //recalculing the good polar coordinate       
+    m_rho = sqrt((float) x*x+y*y); //squareroot(x²+y²)
+    m_theta = atan2((float) y,(float) x); // arctan(y/x)
+
+	MAPSStreamedString icStr;
+	icStr << "INPUTS (converted) : Rho = " << m_rho << " | Theta = " << m_theta;
+	ReportInfo(MAPSString(icStr));
 
 	//ReportInfo("Process error...");
     cv::Mat E = getError(m_rho, m_theta);
@@ -112,19 +170,19 @@ void MAPSVisionBasedCommand::Core()
 	cv::Mat Voltage = getVoltage(Speed);
 
 	MAPSStreamedString oStr;
-	oStr << "OUTPUTS : Left's set point = " << (int) Voltage.at<double>(0,0) << " | Right's set point = " << (int) Voltage.at<double>(1,0);
+	oStr << "OUTPUTS : Left set point = " << (int) (Voltage.at<double>(0,0)*10) << " | Right set point = " << (int) (Voltage.at<double>(1,0)*10);
 	ReportInfo(MAPSString(oStr));
 
 	//The chosen timestamp is the oldest of the 2 received MAPSIOElts. (if _synch_tolerance is 0, then the 2 MAPSIOElt timestamps are equal).
 	//Generate the outputs
 	MAPSIOElt* ioEltOut = StartWriting(Output("oLeft_speed"));
-	ioEltOut->Integer(0) = (int) Voltage.at<double>(0,0);
+	ioEltOut->Integer(0) = (int) (Voltage.at<double>(0,0)*10);
 	ioEltOut->VectorSize() = 1;
 	ioEltOut->Timestamp() = t; 
 	StopWriting(ioEltOut);
 
 	ioEltOut = StartWriting(Output("oRight_speed"));
-	ioEltOut->Integer(0) = (int) Voltage.at<double>(1,0);
+	ioEltOut->Integer(0) = (int) (Voltage.at<double>(1,0)*10);
 	ioEltOut->VectorSize() = 1;
 	ioEltOut->Timestamp() = t;
 	StopWriting(ioEltOut);
@@ -137,57 +195,59 @@ void MAPSVisionBasedCommand::Death()
 
 cv::Mat MAPSVisionBasedCommand::getCommand(cv::Mat& LTplus, cv::Mat& B, cv::Mat& E, cv::Mat& K) {
     
-	//ReportInfo("\t[Process command] Process integral...");
+	//ReportInfo("[Process command] Process integral...");
 	MAPSStreamedString eStr;
-	eStr << "\t[Command] Error = [" << E.at<double>(0,0) << ", " << E.at<double>(1,0) << "]";
+	eStr << "[Command] Error = [" << E.at<double>(0,0) << ", " << E.at<double>(1,0) << "]";
 	ReportInfo(MAPSString(eStr));
 
-    if(GetBoolProperty("pIntegral") == true) m_integralE += E;
+    if(GetBoolProperty("pIntegral") == true) {
+		m_integralE += E;
 	
-	MAPSStreamedString ieStr;
-	ieStr << "\t[Command] Integral = [" << m_integralE.at<double>(0,0) << ", " << m_integralE.at<double>(1,0) << "]";
-	ReportInfo(MAPSString(ieStr));
+		MAPSStreamedString ieStr;
+		ieStr << "[Command] Integral = [" << m_integralE.at<double>(0,0) << ", " << m_integralE.at<double>(1,0) << "]";
+		ReportInfo(MAPSString(ieStr));
+	}
 
-	//ReportInfo("\t[Process command] Process kinematic torsor...");
+	//ReportInfo("[Process command] Process kinematic torsor...");
     //kinematic torsor
     cv::Mat T(6,1,CV_MAT_DOUBLE);
     T = LTplus*B*(E+K.mul(m_integralE));
     
     double phi = T.at<double>(4,0); // == rotation around y axis
     
-	//ReportInfo("\t[Process command] Process angular speed...");
+	//ReportInfo("[Process command] Process angular speed...");
     //angular speed (rad/s)
     cv::Mat Omega = cv::Mat::ones(2,1,CV_MAT_DOUBLE);
     Omega.at<double>(0,0) = (2*m_speed0 - WIFIBOT_WHEEL_SPREADING*phi)/(2*WIFIBOT_WHEEL_RADIUS); // left wheels
     Omega.at<double>(1,0) = (2*m_speed0 + WIFIBOT_WHEEL_SPREADING*phi)/(2*WIFIBOT_WHEEL_RADIUS); // right wheels
 	
-	MAPSStreamedString oStr;
-	oStr << "\t[Command] Omega = [" <<  Omega.at<double>(0,0) << ", " << Omega.at<double>(1,0) << "]";
-	ReportInfo(MAPSString(oStr));
+	//MAPSStreamedString oStr;
+	//oStr << "[Command] Omega = [" <<  Omega.at<double>(0,0) << ", " << Omega.at<double>(1,0) << "]";
+	//ReportInfo(MAPSString(oStr));
 
-	ReportInfo("\t[Command] Process speed...");
+	//ReportInfo("[Command] Process speed...");
 	//speed (rpm)
     cv::Mat Speed;
     Omega.copyTo(Speed);
     Speed *= 60/(2*MAPS_PI);
 
+    //should be unecessary because the RTMaps block for controlling the Wifibot (wifibot_serial) is doing this checking already
+	if(abs(Speed.at<double>(0,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(0,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(0,0) > 0 ? 1 : -1);
+    if(abs(Speed.at<double>(1,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(1,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(1,0) > 0 ? 1 : -1);
+    
 	MAPSStreamedString sStr;
-	sStr << "\t[Command] Speed = [" <<  Speed.at<double>(0,0) << ", " << Speed.at<double>(1,0) << "]";
+	sStr << "[Command] Speed = [" <<  Speed.at<double>(0,0) << ", " << Speed.at<double>(1,0) << "]";
 	ReportInfo(MAPSString(sStr));
 
-    //unecessary because the RTMaps block for controlling the Wifibot (wifibot_serial) is doing this checking already
-	//if(abs(Speed.at<double>(0,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(0,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(0,0) > 0 ? 1 : -1);
-    //if(abs(Speed.at<double>(1,0)) > WIFIBOT_MOTOR_MAX_SPEED) Speed.at<double>(1,0) = WIFIBOT_MOTOR_MAX_SPEED * (Speed.at<double>(1,0) > 0 ? 1 : -1);
-    
     return Speed; // return in rpm
 }
 
-cv::Mat MAPSVisionBasedCommand::getError (const unsigned int rho, const double theta) {
+cv::Mat MAPSVisionBasedCommand::getError (const int rho, const double theta) {
     
     cv::Mat E(2,1,CV_MAT_DOUBLE);
     
     E.at<double>(0,0) = theta - m_theta0;
-    E.at<double>(1,0) = fmod(rho, 2*MAPS_PI) - fmod(m_rho0, 2*MAPS_PI);
+    E.at<double>(1,0) = rho - m_rho0;
     
     return E;
 }
@@ -238,4 +298,12 @@ double MAPSVisionBasedCommand::cos2(double x) {
 
 double MAPSVisionBasedCommand::sin2(double x) {
      return (1 - cos(2*x))/2;
+}
+
+int MAPSVisionBasedCommand::xImgToChart(const int x, const unsigned int w) {
+    return x-floor((float) w/2)+1;
+}
+
+int MAPSVisionBasedCommand::yImgToChart(const int y, const unsigned int h) {
+    return  floor((float) h/2)-1-y;
 }

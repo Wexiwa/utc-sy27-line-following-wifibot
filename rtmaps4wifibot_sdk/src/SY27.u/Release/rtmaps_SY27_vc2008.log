@@ -1,7 +1,7 @@
-﻿La génération a démarré 03/01/2013 01:34:44.
+﻿La génération a démarré 14/01/2013 04:11:45.
      1>Projet "C:\Users\Maxime\Dropbox\SY27\utc-sy27-line-following-wifibot\rtmaps4wifibot_sdk\src\SY27.u\rtmaps_SY27_vc2008.vcxproj" sur le nœud 2 (build cible(s)).
      1>InitializeBuildStatus:
-         Création de "Release\SY27.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
+         Mise à jour de l'horodatage "Release\SY27.unsuccessfulbuild".
        ClCompile:
          c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I./local_interfaces /Zi /nologo /W1 /WX- /O2 /Oy- /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt src\maps_VisionBasedCommand.cpp
          maps_VisionBasedCommand.cpp
@@ -21,4 +21,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:17.03
+Temps écoulé 00:00:14.60

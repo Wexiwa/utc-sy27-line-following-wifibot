@@ -72,13 +72,15 @@ private :
 	cv::Mat m_integralE; // Integral value matrix
 
 	cv::Mat getCommand(cv::Mat&, cv::Mat&, cv::Mat&, cv::Mat&);
-	cv::Mat getError(const unsigned int, const double);
+	cv::Mat getError (const int, const double);
 	cv::Mat getProportional ();
 	cv::Mat getIntegral();
 	cv::Mat getInteractionMatrixPseudoInverse();
 	cv::Mat getVoltage(cv::Mat&);
 	double cos2(double); // == cos²(x)
 	double sin2(double); // == sin²(x)
+	int xImgToChart(const int, const unsigned int);
+	int yImgToChart(const int, const unsigned int);
 };
 
 #endif
